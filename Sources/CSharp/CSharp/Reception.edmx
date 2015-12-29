@@ -1,0 +1,2608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjetWEBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_BOOK">
+          <Key>
+            <PropertyRef Name="BOO_REC_ID" />
+            <PropertyRef Name="BOO_CLI_ID" />
+          </Key>
+          <Property Name="BOO_REC_ID" Type="int" Nullable="false" />
+          <Property Name="BOO_CLI_ID" Type="int" Nullable="false" />
+          <Property Name="BOO_VALID" Type="bit" Nullable="false" />
+          <Property Name="BOO_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="BOO_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_CHOOSE">
+          <Key>
+            <PropertyRef Name="CHO_CLI_ID" />
+            <PropertyRef Name="CHO_DIS_ID" />
+            <PropertyRef Name="CHO_REC_ID" />
+          </Key>
+          <Property Name="CHO_CLI_ID" Type="int" Nullable="false" />
+          <Property Name="CHO_DIS_ID" Type="int" Nullable="false" />
+          <Property Name="CHO_REC_ID" Type="int" Nullable="false" />
+          <Property Name="CHO_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="CHO_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_CLIENT">
+          <Key>
+            <PropertyRef Name="CLI_ID" />
+          </Key>
+          <Property Name="CLI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLI_ACRONYM" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="CLI_PASSWORD" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CLI_GROUP" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CLI_FNAME" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CLI_LNAME" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CLI_SEX" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CLI_BDAY" Type="date" Nullable="false" />
+          <Property Name="CLI_JOB" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CLI_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="CLI_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_DISH">
+          <Key>
+            <PropertyRef Name="DIS_ID" />
+          </Key>
+          <Property Name="DIS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DIS_NAME" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DIS_TYPE" Type="int" Nullable="false" />
+          <Property Name="DIS_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="DIS_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_DISHTYPE">
+          <Key>
+            <PropertyRef Name="DTY_ID" />
+          </Key>
+          <Property Name="DTY_ID" Type="int" Nullable="false" />
+          <Property Name="DTY_NAME" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_FEEL_CLI_CLI">
+          <Key>
+            <PropertyRef Name="FCC_CLI_FROM_ID" />
+            <PropertyRef Name="FCC_CLI_TO_ID" />
+          </Key>
+          <Property Name="FCC_CLI_FROM_ID" Type="int" Nullable="false" />
+          <Property Name="FCC_CLI_TO_ID" Type="int" Nullable="false" />
+          <Property Name="FCC_FTY_ID" Type="int" Nullable="false" />
+          <Property Name="FCC_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="FCC_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_FEEL_CLI_DIS">
+          <Key>
+            <PropertyRef Name="FCD_CLI_ID" />
+            <PropertyRef Name="FCD_DIS_ID" />
+          </Key>
+          <Property Name="FCD_CLI_ID" Type="int" Nullable="false" />
+          <Property Name="FCD_DIS_ID" Type="int" Nullable="false" />
+          <Property Name="FCD_FTY_ID" Type="int" Nullable="false" />
+          <Property Name="FCD_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="FCD_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_FEELINGTYPE">
+          <Key>
+            <PropertyRef Name="FTY_ID" />
+          </Key>
+          <Property Name="FTY_ID" Type="int" Nullable="false" />
+          <Property Name="FTY_NAME" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_OFFER">
+          <Key>
+            <PropertyRef Name="OFF_REC_ID" />
+            <PropertyRef Name="OFF_DIS_ID" />
+          </Key>
+          <Property Name="OFF_REC_ID" Type="int" Nullable="false" />
+          <Property Name="OFF_DIS_ID" Type="int" Nullable="false" />
+          <Property Name="OFF_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="OFF_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_RECEPTION">
+          <Key>
+            <PropertyRef Name="REC_ID" />
+          </Key>
+          <Property Name="REC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REC_NAME" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="REC_DATE" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="REC_DATE_CLOSING_REG" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="REC_CAPACITY" Type="int" Nullable="false" />
+          <Property Name="REC_SEAT_TABLE" Type="int" Nullable="false" />
+          <Property Name="REC_VALID" Type="bit" Nullable="false" />
+          <Property Name="REC_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="REC_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_SIT">
+          <Key>
+            <PropertyRef Name="SIT_TAB_ID" />
+            <PropertyRef Name="SIT_CLI_ID" />
+          </Key>
+          <Property Name="SIT_TAB_ID" Type="int" Nullable="false" />
+          <Property Name="SIT_CLI_ID" Type="int" Nullable="false" />
+          <Property Name="SIT_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="SIT_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="_TABLE">
+          <Key>
+            <PropertyRef Name="TAB_ID" />
+          </Key>
+          <Property Name="TAB_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TAB_NUMBER" Type="int" Nullable="false" />
+          <Property Name="TAB_SEATING" Type="int" Nullable="false" />
+          <Property Name="TAB_REC_ID" Type="int" Nullable="false" />
+          <Property Name="TAB_VALID" Type="bit" Nullable="false" />
+          <Property Name="TAB_UPDATE_AT" Type="datetime2" Precision="7" />
+          <Property Name="TAB_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.Client' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Acronym" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Sex" />
+            <PropertyRef Name="BirthDay" />
+            <PropertyRef Name="Job" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="Acronym" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BirthDay" Type="date" Nullable="false" />
+          <Property Name="Job" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.Dish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="Type" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishTypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.DishType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DishType">
+          <Key>
+            <PropertyRef Name="Label" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Label" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.DishWish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DishWish">
+          <Key>
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="Feeling" />
+            <PropertyRef Name="DishType" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="FeelingTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ClientFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientLastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Feeling" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DishType" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DishName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishTypeId" Type="int" Nullable="false" />
+          <Property Name="FeelingTypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.Feeling' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Feeling">
+          <Key>
+            <PropertyRef Name="ClientFromFirstName" />
+            <PropertyRef Name="ClientFromLastName" />
+            <PropertyRef Name="Feeling" />
+            <PropertyRef Name="ClientToFirstName" />
+            <PropertyRef Name="ClientToLastName" />
+            <PropertyRef Name="ClientFromId" />
+            <PropertyRef Name="ClientToId" />
+            <PropertyRef Name="FeelingTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ClientFromFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientFromLastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Feeling" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientToFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientToLastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientFromId" Type="int" Nullable="false" />
+          <Property Name="ClientToId" Type="int" Nullable="false" />
+          <Property Name="FeelingTypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.FeelingType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FeelingType">
+          <Key>
+            <PropertyRef Name="Label" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Label" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="DishType" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceptionDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DishType" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DishName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceptionId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishTypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.Reception' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Reception">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="BookingClosingDate" />
+            <PropertyRef Name="Capacity" />
+            <PropertyRef Name="SeatsPerTable" />
+            <PropertyRef Name="IsValid" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="BookingClosingDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="SeatsPerTable" Type="int" Nullable="false" />
+          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="ReceptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.Reservation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="IsValid" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceptionDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ClientFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientLastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="ReceptionId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.ReservedDish' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReservedDish">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="DishType" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceptionDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ClientFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientLastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DishType" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="DishName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceptionId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishTypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TablesMap">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="TableNumber" />
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="IsValid" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="TableId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ReceptionDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="TableNumber" Type="int" Nullable="false" />
+          <Property Name="ClientFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ClientLastName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="ReceptionId" Type="int" Nullable="false" />
+          <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BOOK_CLI">
+          <End Role="_CLIENT" Type="Self._CLIENT" Multiplicity="1" />
+          <End Role="_BOOK" Type="Self._BOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="_BOOK">
+              <PropertyRef Name="BOO_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOOK_REC">
+          <End Role="_RECEPTION" Type="Self._RECEPTION" Multiplicity="1" />
+          <End Role="_BOOK" Type="Self._BOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="_BOOK">
+              <PropertyRef Name="BOO_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOOSE_CLI">
+          <End Role="_CLIENT" Type="Self._CLIENT" Multiplicity="1" />
+          <End Role="_CHOOSE" Type="Self._CHOOSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="_CHOOSE">
+              <PropertyRef Name="CHO_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOOSE_DIS">
+          <End Role="_DISH" Type="Self._DISH" Multiplicity="1" />
+          <End Role="_CHOOSE" Type="Self._CHOOSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_DISH">
+              <PropertyRef Name="DIS_ID" />
+            </Principal>
+            <Dependent Role="_CHOOSE">
+              <PropertyRef Name="CHO_DIS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOOSE_REC">
+          <End Role="_RECEPTION" Type="Self._RECEPTION" Multiplicity="1" />
+          <End Role="_CHOOSE" Type="Self._CHOOSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="_CHOOSE">
+              <PropertyRef Name="CHO_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISH_TYPE">
+          <End Role="_DISHTYPE" Type="Self._DISHTYPE" Multiplicity="1" />
+          <End Role="_DISH" Type="Self._DISH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_DISHTYPE">
+              <PropertyRef Name="DTY_ID" />
+            </Principal>
+            <Dependent Role="_DISH">
+              <PropertyRef Name="DIS_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_CLI_CLI1">
+          <End Role="_CLIENT" Type="Self._CLIENT" Multiplicity="1" />
+          <End Role="_FEEL_CLI_CLI" Type="Self._FEEL_CLI_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="_FEEL_CLI_CLI">
+              <PropertyRef Name="FCC_CLI_FROM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_CLI_CLI2">
+          <End Role="_CLIENT" Type="Self._CLIENT" Multiplicity="1" />
+          <End Role="_FEEL_CLI_CLI" Type="Self._FEEL_CLI_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="_FEEL_CLI_CLI">
+              <PropertyRef Name="FCC_CLI_TO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_CLI_FEELINGTYPE">
+          <End Role="_FEELINGTYPE" Type="Self._FEELINGTYPE" Multiplicity="1" />
+          <End Role="_FEEL_CLI_CLI" Type="Self._FEEL_CLI_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_FEELINGTYPE">
+              <PropertyRef Name="FTY_ID" />
+            </Principal>
+            <Dependent Role="_FEEL_CLI_CLI">
+              <PropertyRef Name="FCC_FTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_DIS_CLI">
+          <End Role="_CLIENT" Type="Self._CLIENT" Multiplicity="1" />
+          <End Role="_FEEL_CLI_DIS" Type="Self._FEEL_CLI_DIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="_FEEL_CLI_DIS">
+              <PropertyRef Name="FCD_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_DIS_DISH">
+          <End Role="_DISH" Type="Self._DISH" Multiplicity="1" />
+          <End Role="_FEEL_CLI_DIS" Type="Self._FEEL_CLI_DIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_DISH">
+              <PropertyRef Name="DIS_ID" />
+            </Principal>
+            <Dependent Role="_FEEL_CLI_DIS">
+              <PropertyRef Name="FCD_DIS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_DIS_FEELINGTYPE">
+          <End Role="_FEELINGTYPE" Type="Self._FEELINGTYPE" Multiplicity="1" />
+          <End Role="_FEEL_CLI_DIS" Type="Self._FEEL_CLI_DIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_FEELINGTYPE">
+              <PropertyRef Name="FTY_ID" />
+            </Principal>
+            <Dependent Role="_FEEL_CLI_DIS">
+              <PropertyRef Name="FCD_FTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OFFER_DIS">
+          <End Role="_DISH" Type="Self._DISH" Multiplicity="1" />
+          <End Role="_OFFER" Type="Self._OFFER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_DISH">
+              <PropertyRef Name="DIS_ID" />
+            </Principal>
+            <Dependent Role="_OFFER">
+              <PropertyRef Name="OFF_DIS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OFFER_REC">
+          <End Role="_RECEPTION" Type="Self._RECEPTION" Multiplicity="1" />
+          <End Role="_OFFER" Type="Self._OFFER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="_OFFER">
+              <PropertyRef Name="OFF_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIT_CLI">
+          <End Role="_CLIENT" Type="Self._CLIENT" Multiplicity="1" />
+          <End Role="_SIT" Type="Self._SIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="_SIT">
+              <PropertyRef Name="SIT_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIT_TAB">
+          <End Role="_TABLE" Type="Self._TABLE" Multiplicity="1" />
+          <End Role="_SIT" Type="Self._SIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_TABLE">
+              <PropertyRef Name="TAB_ID" />
+            </Principal>
+            <Dependent Role="_SIT">
+              <PropertyRef Name="SIT_TAB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABLE_RECEPTION">
+          <End Role="_RECEPTION" Type="Self._RECEPTION" Multiplicity="1" />
+          <End Role="_TABLE" Type="Self._TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="_TABLE">
+              <PropertyRef Name="TAB_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteDishWish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeleteFeeling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliFromId" Type="int" Mode="In" />
+          <Parameter Name="CliToId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeleteMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeleteReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeleteReservedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeleteSit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeleteTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DoLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="Acronym" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetDishToPrepare" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="DishType" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="DishName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="DishId" Type="int" Nullable="false" />
+                <Property Name="DishTypeId" Type="int" Nullable="false" />
+                <Property Name="Quantity" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetFeeling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="FtyId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Feeling" Type="varchar" MaxLength="64" />
+                <Property Name="FirstName" Type="varchar" MaxLength="64" />
+                <Property Name="LastName" Type="varchar" MaxLength="64" />
+                <Property Name="ClientId" Type="int" />
+                <Property Name="FeelingTypeId" Type="int" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="Acronym" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="DtyId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="DishType" Type="varchar" MaxLength="64" />
+                <Property Name="DishName" Type="varchar" MaxLength="64" />
+                <Property Name="DishId" Type="int" />
+                <Property Name="DishTypeId" Type="int" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetReservableReception" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+                <Property Name="BookingClosingDate" Type="datetime2" Precision="7" Nullable="false" />
+                <Property Name="Capacity" Type="int" Nullable="false" />
+                <Property Name="SeatsPerTable" Type="int" Nullable="false" />
+                <Property Name="IsValid" Type="bit" Nullable="false" />
+                <Property Name="ReceptionId" Type="int" Nullable="false" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ClientFirstName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="ClientLastName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="IsValid" Type="bit" Nullable="false" />
+                <Property Name="ClientId" Type="int" Nullable="false" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetReservedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ClientFirstName" Type="varchar" MaxLength="64" />
+                <Property Name="ClientLastName" Type="varchar" MaxLength="64" />
+                <Property Name="DishType" Type="varchar" MaxLength="64" />
+                <Property Name="DishName" Type="varchar" MaxLength="64" />
+                <Property Name="ClientId" Type="int" />
+                <Property Name="DishId" Type="int" />
+                <Property Name="DishTypeId" Type="int" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetReservedReception" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ReceptionName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="ReceptionDate" Type="datetime2" Precision="7" Nullable="false" />
+                <Property Name="IsValid" Type="bit" Nullable="false" />
+                <Property Name="ReceptionId" Type="int" Nullable="false" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetTablesMap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="TabId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TableNumber" Type="int" />
+                <Property Name="ClientFirstName" Type="varchar" MaxLength="64" />
+                <Property Name="ClientLastName" Type="varchar" MaxLength="64" />
+                <Property Name="IsValid" Type="bit" />
+                <Property Name="ReceptionId" Type="int" />
+                <Property Name="TableId" Type="int" />
+                <Property Name="ClientId" Type="int" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetUnfeeling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="FirstName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="LastName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="ClientId" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetUnreservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Acronym" Type="char" MaxLength="8" Nullable="false" />
+                <Property Name="FirstName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="LastName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+                <Property Name="BirthDay" Type="date" Nullable="false" />
+                <Property Name="Job" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="ClientId" Type="int" Nullable="false" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetUnreservedReception" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+                <Property Name="BookingClosingDate" Type="datetime2" Precision="7" Nullable="false" />
+                <Property Name="Capacity" Type="int" Nullable="false" />
+                <Property Name="SeatsPerTable" Type="int" Nullable="false" />
+                <Property Name="IsValid" Type="bit" Nullable="false" />
+                <Property Name="ReceptionId" Type="int" Nullable="false" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetUnwishedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Type" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="DishId" Type="int" Nullable="false" />
+                <Property Name="DishTypeId" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetWishedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="FtyId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Feeling" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="DishType" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="DishName" Type="varchar" MaxLength="64" Nullable="false" />
+                <Property Name="DishId" Type="int" Nullable="false" />
+                <Property Name="DishTypeId" Type="int" Nullable="false" />
+                <Property Name="FeelingTypeId" Type="int" Nullable="false" />
+                <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
+                <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="IS_VALID_BOOK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IS_VALID_RECEPTION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IS_VALID_TABLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="NewFeeling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliFromId" Type="int" Mode="In" />
+          <Parameter Name="CliToId" Type="int" Mode="In" />
+          <Parameter Name="FtyId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="NewMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="NewReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="NewReservedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="NewSit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="NewTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="TableNumber" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+          <Parameter Name="TabId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="NewWishedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="FtyId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="SP_VALIDATE_BOOK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_VALIDATE_RECEPTION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_VALIDATE_TABLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_BOOK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_CHOOSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="RecId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_CLIENT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_DISH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="DisId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_FEEL_CLI_CLI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="CliFromId" Type="int" Mode="In" />
+          <Parameter Name="CliToId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_FEEL_CLI_DIS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_OFFER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_RECEPTION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="RecId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_SIT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+          <Parameter Name="CliId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_AT_TABLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime2">
+          <Parameter Name="TabId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateFeeling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliFromId" Type="int" Mode="In" />
+          <Parameter Name="CliToId" Type="int" Mode="In" />
+          <Parameter Name="FtyId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <Function Name="UpdateWishedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CliId" Type="int" Mode="In" />
+          <Parameter Name="DisId" Type="int" Mode="In" />
+          <Parameter Name="DtyId" Type="int" Mode="In" />
+          <Parameter Name="ModifiedAt" Type="datetime2" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="char" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProjetWEBModelStoreContainer">
+          <EntitySet Name="_BOOK" EntityType="Self._BOOK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_CHOOSE" EntityType="Self._CHOOSE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_CLIENT" EntityType="Self._CLIENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_DISH" EntityType="Self._DISH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_DISHTYPE" EntityType="Self._DISHTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_FEEL_CLI_CLI" EntityType="Self._FEEL_CLI_CLI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_FEEL_CLI_DIS" EntityType="Self._FEEL_CLI_DIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_FEELINGTYPE" EntityType="Self._FEELINGTYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_OFFER" EntityType="Self._OFFER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_RECEPTION" EntityType="Self._RECEPTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_SIT" EntityType="Self._SIT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_TABLE" EntityType="Self._TABLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Client].[Acronym] AS [Acronym], 
+    [Client].[FirstName] AS [FirstName], 
+    [Client].[LastName] AS [LastName], 
+    [Client].[Sex] AS [Sex], 
+    [Client].[BirthDay] AS [BirthDay], 
+    [Client].[Job] AS [Job], 
+    [Client].[ClientId] AS [ClientId], 
+    [Client].[ModifiedAt] AS [ModifiedAt], 
+    [Client].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[Client] AS [Client]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Dish" EntityType="Self.Dish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Dish].[Type] AS [Type], 
+    [Dish].[Name] AS [Name], 
+    [Dish].[DishId] AS [DishId], 
+    [Dish].[DishTypeId] AS [DishTypeId], 
+    [Dish].[ModifiedAt] AS [ModifiedAt], 
+    [Dish].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[Dish] AS [Dish]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DishType" EntityType="Self.DishType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DishType].[Label] AS [Label], 
+    [DishType].[Id] AS [Id]
+    FROM [dbo].[DishType] AS [DishType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DishWish" EntityType="Self.DishWish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DishWish].[ClientFirstName] AS [ClientFirstName], 
+    [DishWish].[ClientLastName] AS [ClientLastName], 
+    [DishWish].[Feeling] AS [Feeling], 
+    [DishWish].[DishType] AS [DishType], 
+    [DishWish].[DishName] AS [DishName], 
+    [DishWish].[ClientId] AS [ClientId], 
+    [DishWish].[DishId] AS [DishId], 
+    [DishWish].[DishTypeId] AS [DishTypeId], 
+    [DishWish].[FeelingTypeId] AS [FeelingTypeId], 
+    [DishWish].[ModifiedAt] AS [ModifiedAt], 
+    [DishWish].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[DishWish] AS [DishWish]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Feeling" EntityType="Self.Feeling" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Feeling].[ClientFromFirstName] AS [ClientFromFirstName], 
+    [Feeling].[ClientFromLastName] AS [ClientFromLastName], 
+    [Feeling].[Feeling] AS [Feeling], 
+    [Feeling].[ClientToFirstName] AS [ClientToFirstName], 
+    [Feeling].[ClientToLastName] AS [ClientToLastName], 
+    [Feeling].[ClientFromId] AS [ClientFromId], 
+    [Feeling].[ClientToId] AS [ClientToId], 
+    [Feeling].[FeelingTypeId] AS [FeelingTypeId], 
+    [Feeling].[ModifiedAt] AS [ModifiedAt], 
+    [Feeling].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[Feeling] AS [Feeling]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FeelingType" EntityType="Self.FeelingType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FeelingType].[Label] AS [Label], 
+    [FeelingType].[Id] AS [Id]
+    FROM [dbo].[FeelingType] AS [FeelingType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Menu" EntityType="Self.Menu" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Menu].[ReceptionName] AS [ReceptionName], 
+    [Menu].[ReceptionDate] AS [ReceptionDate], 
+    [Menu].[DishType] AS [DishType], 
+    [Menu].[DishName] AS [DishName], 
+    [Menu].[ReceptionId] AS [ReceptionId], 
+    [Menu].[DishId] AS [DishId], 
+    [Menu].[DishTypeId] AS [DishTypeId], 
+    [Menu].[ModifiedAt] AS [ModifiedAt], 
+    [Menu].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[Menu] AS [Menu]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Reception" EntityType="Self.Reception" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reception].[Name] AS [Name], 
+    [Reception].[Date] AS [Date], 
+    [Reception].[BookingClosingDate] AS [BookingClosingDate], 
+    [Reception].[Capacity] AS [Capacity], 
+    [Reception].[SeatsPerTable] AS [SeatsPerTable], 
+    [Reception].[IsValid] AS [IsValid], 
+    [Reception].[ReceptionId] AS [ReceptionId], 
+    [Reception].[ModifiedAt] AS [ModifiedAt], 
+    [Reception].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[Reception] AS [Reception]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Reservation].[ReceptionName] AS [ReceptionName], 
+    [Reservation].[ReceptionDate] AS [ReceptionDate], 
+    [Reservation].[ClientFirstName] AS [ClientFirstName], 
+    [Reservation].[ClientLastName] AS [ClientLastName], 
+    [Reservation].[IsValid] AS [IsValid], 
+    [Reservation].[ReceptionId] AS [ReceptionId], 
+    [Reservation].[ClientId] AS [ClientId], 
+    [Reservation].[ModifiedAt] AS [ModifiedAt], 
+    [Reservation].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[Reservation] AS [Reservation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ReservedDish" EntityType="Self.ReservedDish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReservedDish].[ReceptionName] AS [ReceptionName], 
+    [ReservedDish].[ReceptionDate] AS [ReceptionDate], 
+    [ReservedDish].[ClientFirstName] AS [ClientFirstName], 
+    [ReservedDish].[ClientLastName] AS [ClientLastName], 
+    [ReservedDish].[DishType] AS [DishType], 
+    [ReservedDish].[DishName] AS [DishName], 
+    [ReservedDish].[ReceptionId] AS [ReceptionId], 
+    [ReservedDish].[ClientId] AS [ClientId], 
+    [ReservedDish].[DishId] AS [DishId], 
+    [ReservedDish].[DishTypeId] AS [DishTypeId], 
+    [ReservedDish].[ModifiedAt] AS [ModifiedAt], 
+    [ReservedDish].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[ReservedDish] AS [ReservedDish]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TablesMap" EntityType="Self.TablesMap" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TablesMap].[ReceptionName] AS [ReceptionName], 
+    [TablesMap].[ReceptionDate] AS [ReceptionDate], 
+    [TablesMap].[TableNumber] AS [TableNumber], 
+    [TablesMap].[ClientFirstName] AS [ClientFirstName], 
+    [TablesMap].[ClientLastName] AS [ClientLastName], 
+    [TablesMap].[IsValid] AS [IsValid], 
+    [TablesMap].[ReceptionId] AS [ReceptionId], 
+    [TablesMap].[TableId] AS [TableId], 
+    [TablesMap].[ClientId] AS [ClientId], 
+    [TablesMap].[ModifiedAt] AS [ModifiedAt], 
+    [TablesMap].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[TablesMap] AS [TablesMap]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BOOK_CLI" Association="Self.FK_BOOK_CLI">
+            <End Role="_CLIENT" EntitySet="_CLIENT" />
+            <End Role="_BOOK" EntitySet="_BOOK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOOK_REC" Association="Self.FK_BOOK_REC">
+            <End Role="_RECEPTION" EntitySet="_RECEPTION" />
+            <End Role="_BOOK" EntitySet="_BOOK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOOSE_CLI" Association="Self.FK_CHOOSE_CLI">
+            <End Role="_CLIENT" EntitySet="_CLIENT" />
+            <End Role="_CHOOSE" EntitySet="_CHOOSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOOSE_DIS" Association="Self.FK_CHOOSE_DIS">
+            <End Role="_DISH" EntitySet="_DISH" />
+            <End Role="_CHOOSE" EntitySet="_CHOOSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOOSE_REC" Association="Self.FK_CHOOSE_REC">
+            <End Role="_RECEPTION" EntitySet="_RECEPTION" />
+            <End Role="_CHOOSE" EntitySet="_CHOOSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISH_TYPE" Association="Self.FK_DISH_TYPE">
+            <End Role="_DISHTYPE" EntitySet="_DISHTYPE" />
+            <End Role="_DISH" EntitySet="_DISH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_CLI_CLI1" Association="Self.FK_FEEL_CLI_CLI_CLI1">
+            <End Role="_CLIENT" EntitySet="_CLIENT" />
+            <End Role="_FEEL_CLI_CLI" EntitySet="_FEEL_CLI_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_CLI_CLI2" Association="Self.FK_FEEL_CLI_CLI_CLI2">
+            <End Role="_CLIENT" EntitySet="_CLIENT" />
+            <End Role="_FEEL_CLI_CLI" EntitySet="_FEEL_CLI_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_CLI_FEELINGTYPE" Association="Self.FK_FEEL_CLI_CLI_FEELINGTYPE">
+            <End Role="_FEELINGTYPE" EntitySet="_FEELINGTYPE" />
+            <End Role="_FEEL_CLI_CLI" EntitySet="_FEEL_CLI_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_DIS_CLI" Association="Self.FK_FEEL_CLI_DIS_CLI">
+            <End Role="_CLIENT" EntitySet="_CLIENT" />
+            <End Role="_FEEL_CLI_DIS" EntitySet="_FEEL_CLI_DIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_DIS_DISH" Association="Self.FK_FEEL_CLI_DIS_DISH">
+            <End Role="_DISH" EntitySet="_DISH" />
+            <End Role="_FEEL_CLI_DIS" EntitySet="_FEEL_CLI_DIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_DIS_FEELINGTYPE" Association="Self.FK_FEEL_CLI_DIS_FEELINGTYPE">
+            <End Role="_FEELINGTYPE" EntitySet="_FEELINGTYPE" />
+            <End Role="_FEEL_CLI_DIS" EntitySet="_FEEL_CLI_DIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OFFER_DIS" Association="Self.FK_OFFER_DIS">
+            <End Role="_DISH" EntitySet="_DISH" />
+            <End Role="_OFFER" EntitySet="_OFFER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OFFER_REC" Association="Self.FK_OFFER_REC">
+            <End Role="_RECEPTION" EntitySet="_RECEPTION" />
+            <End Role="_OFFER" EntitySet="_OFFER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIT_CLI" Association="Self.FK_SIT_CLI">
+            <End Role="_CLIENT" EntitySet="_CLIENT" />
+            <End Role="_SIT" EntitySet="_SIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIT_TAB" Association="Self.FK_SIT_TAB">
+            <End Role="_TABLE" EntitySet="_TABLE" />
+            <End Role="_SIT" EntitySet="_SIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABLE_RECEPTION" Association="Self.FK_TABLE_RECEPTION">
+            <End Role="_RECEPTION" EntitySet="_RECEPTION" />
+            <End Role="_TABLE" EntitySet="_TABLE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjetWEBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GetDishToPrepare_Result">
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="GetFeeling_Result">
+          <Property Name="Feeling" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="FeelingTypeId" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="GetMenu_Result">
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DishId" Type="Int32" />
+          <Property Name="DishTypeId" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="GetReservableReception_Result">
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="BookingClosingDate" Type="DateTime" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="SeatsPerTable" Type="Int32" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetReservation_Result">
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetReservedDish_Result">
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="DishId" Type="Int32" />
+          <Property Name="DishTypeId" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="GetReservedReception_Result">
+          <Property Name="ReceptionName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetTablesMap_Result">
+          <Property Name="TableNumber" Type="Int32" />
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IsValid" Type="Boolean" />
+          <Property Name="ReceptionId" Type="Int32" />
+          <Property Name="TableId" Type="Int32" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="GetUnfeeling_Result">
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetUnreservation_Result">
+          <Property Name="Acronym" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" />
+          <Property Name="Job" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetUnreservedReception_Result">
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="BookingClosingDate" Type="DateTime" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="SeatsPerTable" Type="Int32" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetUnwishedDish_Result">
+          <Property Name="Type" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetWishedDish_Result">
+          <Property Name="Feeling" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FeelingTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="C_BOOK">
+          <Key>
+            <PropertyRef Name="BOO_REC_ID" />
+            <PropertyRef Name="BOO_CLI_ID" />
+          </Key>
+          <Property Name="BOO_REC_ID" Type="Int32" Nullable="false" />
+          <Property Name="BOO_CLI_ID" Type="Int32" Nullable="false" />
+          <Property Name="BOO_VALID" Type="Boolean" Nullable="false" />
+          <Property Name="BOO_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="BOO_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_CLIENT" Relationship="Self.FK_BOOK_CLI" FromRole="C_BOOK" ToRole="C_CLIENT" />
+          <NavigationProperty Name="C_RECEPTION" Relationship="Self.FK_BOOK_REC" FromRole="C_BOOK" ToRole="C_RECEPTION" />
+        </EntityType>
+        <EntityType Name="C_CHOOSE">
+          <Key>
+            <PropertyRef Name="CHO_CLI_ID" />
+            <PropertyRef Name="CHO_DIS_ID" />
+            <PropertyRef Name="CHO_REC_ID" />
+          </Key>
+          <Property Name="CHO_CLI_ID" Type="Int32" Nullable="false" />
+          <Property Name="CHO_DIS_ID" Type="Int32" Nullable="false" />
+          <Property Name="CHO_REC_ID" Type="Int32" Nullable="false" />
+          <Property Name="CHO_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="CHO_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_CLIENT" Relationship="Self.FK_CHOOSE_CLI" FromRole="C_CHOOSE" ToRole="C_CLIENT" />
+          <NavigationProperty Name="C_DISH" Relationship="Self.FK_CHOOSE_DIS" FromRole="C_CHOOSE" ToRole="C_DISH" />
+          <NavigationProperty Name="C_RECEPTION" Relationship="Self.FK_CHOOSE_REC" FromRole="C_CHOOSE" ToRole="C_RECEPTION" />
+        </EntityType>
+        <EntityType Name="C_CLIENT">
+          <Key>
+            <PropertyRef Name="CLI_ID" />
+          </Key>
+          <Property Name="CLI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLI_ACRONYM" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CLI_PASSWORD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLI_GROUP" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLI_FNAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLI_LNAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLI_SEX" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CLI_BDAY" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CLI_JOB" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLI_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="CLI_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_BOOK" Relationship="Self.FK_BOOK_CLI" FromRole="C_CLIENT" ToRole="C_BOOK" />
+          <NavigationProperty Name="C_CHOOSE" Relationship="Self.FK_CHOOSE_CLI" FromRole="C_CLIENT" ToRole="C_CHOOSE" />
+          <NavigationProperty Name="C_FEEL_CLI_CLI" Relationship="Self.FK_FEEL_CLI_CLI_CLI1" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_CLI" />
+          <NavigationProperty Name="C_FEEL_CLI_CLI1" Relationship="Self.FK_FEEL_CLI_CLI_CLI2" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_CLI" />
+          <NavigationProperty Name="C_FEEL_CLI_DIS" Relationship="Self.FK_FEEL_CLI_DIS_CLI" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_DIS" />
+          <NavigationProperty Name="C_SIT" Relationship="Self.FK_SIT_CLI" FromRole="C_CLIENT" ToRole="C_SIT" />
+        </EntityType>
+        <EntityType Name="C_DISH">
+          <Key>
+            <PropertyRef Name="DIS_ID" />
+          </Key>
+          <Property Name="DIS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DIS_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIS_TYPE" Type="Int32" Nullable="false" />
+          <Property Name="DIS_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="DIS_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_CHOOSE" Relationship="Self.FK_CHOOSE_DIS" FromRole="C_DISH" ToRole="C_CHOOSE" />
+          <NavigationProperty Name="C_DISHTYPE" Relationship="Self.FK_DISH_TYPE" FromRole="C_DISH" ToRole="C_DISHTYPE" />
+          <NavigationProperty Name="C_FEEL_CLI_DIS" Relationship="Self.FK_FEEL_CLI_DIS_DISH" FromRole="C_DISH" ToRole="C_FEEL_CLI_DIS" />
+          <NavigationProperty Name="C_OFFER" Relationship="Self.FK_OFFER_DIS" FromRole="C_DISH" ToRole="C_OFFER" />
+        </EntityType>
+        <EntityType Name="C_DISHTYPE">
+          <Key>
+            <PropertyRef Name="DTY_ID" />
+          </Key>
+          <Property Name="DTY_ID" Type="Int32" Nullable="false" />
+          <Property Name="DTY_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_DISH" Relationship="Self.FK_DISH_TYPE" FromRole="C_DISHTYPE" ToRole="C_DISH" />
+        </EntityType>
+        <EntityType Name="C_FEEL_CLI_CLI">
+          <Key>
+            <PropertyRef Name="FCC_CLI_FROM_ID" />
+            <PropertyRef Name="FCC_CLI_TO_ID" />
+          </Key>
+          <Property Name="FCC_CLI_FROM_ID" Type="Int32" Nullable="false" />
+          <Property Name="FCC_CLI_TO_ID" Type="Int32" Nullable="false" />
+          <Property Name="FCC_FTY_ID" Type="Int32" Nullable="false" />
+          <Property Name="FCC_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="FCC_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_CLIENT" Relationship="Self.FK_FEEL_CLI_CLI_CLI1" FromRole="C_FEEL_CLI_CLI" ToRole="C_CLIENT" />
+          <NavigationProperty Name="C_CLIENT1" Relationship="Self.FK_FEEL_CLI_CLI_CLI2" FromRole="C_FEEL_CLI_CLI" ToRole="C_CLIENT" />
+          <NavigationProperty Name="C_FEELINGTYPE" Relationship="Self.FK_FEEL_CLI_CLI_FEELINGTYPE" FromRole="C_FEEL_CLI_CLI" ToRole="C_FEELINGTYPE" />
+        </EntityType>
+        <EntityType Name="C_FEEL_CLI_DIS">
+          <Key>
+            <PropertyRef Name="FCD_CLI_ID" />
+            <PropertyRef Name="FCD_DIS_ID" />
+          </Key>
+          <Property Name="FCD_CLI_ID" Type="Int32" Nullable="false" />
+          <Property Name="FCD_DIS_ID" Type="Int32" Nullable="false" />
+          <Property Name="FCD_FTY_ID" Type="Int32" Nullable="false" />
+          <Property Name="FCD_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="FCD_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_CLIENT" Relationship="Self.FK_FEEL_CLI_DIS_CLI" FromRole="C_FEEL_CLI_DIS" ToRole="C_CLIENT" />
+          <NavigationProperty Name="C_DISH" Relationship="Self.FK_FEEL_CLI_DIS_DISH" FromRole="C_FEEL_CLI_DIS" ToRole="C_DISH" />
+          <NavigationProperty Name="C_FEELINGTYPE" Relationship="Self.FK_FEEL_CLI_DIS_FEELINGTYPE" FromRole="C_FEEL_CLI_DIS" ToRole="C_FEELINGTYPE" />
+        </EntityType>
+        <EntityType Name="C_FEELINGTYPE">
+          <Key>
+            <PropertyRef Name="FTY_ID" />
+          </Key>
+          <Property Name="FTY_ID" Type="Int32" Nullable="false" />
+          <Property Name="FTY_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_FEEL_CLI_CLI" Relationship="Self.FK_FEEL_CLI_CLI_FEELINGTYPE" FromRole="C_FEELINGTYPE" ToRole="C_FEEL_CLI_CLI" />
+          <NavigationProperty Name="C_FEEL_CLI_DIS" Relationship="Self.FK_FEEL_CLI_DIS_FEELINGTYPE" FromRole="C_FEELINGTYPE" ToRole="C_FEEL_CLI_DIS" />
+        </EntityType>
+        <EntityType Name="C_OFFER">
+          <Key>
+            <PropertyRef Name="OFF_REC_ID" />
+            <PropertyRef Name="OFF_DIS_ID" />
+          </Key>
+          <Property Name="OFF_REC_ID" Type="Int32" Nullable="false" />
+          <Property Name="OFF_DIS_ID" Type="Int32" Nullable="false" />
+          <Property Name="OFF_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="OFF_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_DISH" Relationship="Self.FK_OFFER_DIS" FromRole="C_OFFER" ToRole="C_DISH" />
+          <NavigationProperty Name="C_RECEPTION" Relationship="Self.FK_OFFER_REC" FromRole="C_OFFER" ToRole="C_RECEPTION" />
+        </EntityType>
+        <EntityType Name="C_RECEPTION">
+          <Key>
+            <PropertyRef Name="REC_ID" />
+          </Key>
+          <Property Name="REC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REC_NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REC_DATE" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="REC_DATE_CLOSING_REG" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="REC_CAPACITY" Type="Int32" Nullable="false" />
+          <Property Name="REC_SEAT_TABLE" Type="Int32" Nullable="false" />
+          <Property Name="REC_VALID" Type="Boolean" Nullable="false" />
+          <Property Name="REC_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="REC_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_BOOK" Relationship="Self.FK_BOOK_REC" FromRole="C_RECEPTION" ToRole="C_BOOK" />
+          <NavigationProperty Name="C_CHOOSE" Relationship="Self.FK_CHOOSE_REC" FromRole="C_RECEPTION" ToRole="C_CHOOSE" />
+          <NavigationProperty Name="C_OFFER" Relationship="Self.FK_OFFER_REC" FromRole="C_RECEPTION" ToRole="C_OFFER" />
+          <NavigationProperty Name="C_TABLE" Relationship="Self.FK_TABLE_RECEPTION" FromRole="C_RECEPTION" ToRole="C_TABLE" />
+        </EntityType>
+        <EntityType Name="C_SIT">
+          <Key>
+            <PropertyRef Name="SIT_TAB_ID" />
+            <PropertyRef Name="SIT_CLI_ID" />
+          </Key>
+          <Property Name="SIT_TAB_ID" Type="Int32" Nullable="false" />
+          <Property Name="SIT_CLI_ID" Type="Int32" Nullable="false" />
+          <Property Name="SIT_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="SIT_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_CLIENT" Relationship="Self.FK_SIT_CLI" FromRole="C_SIT" ToRole="C_CLIENT" />
+          <NavigationProperty Name="C_TABLE" Relationship="Self.FK_SIT_TAB" FromRole="C_SIT" ToRole="C_TABLE" />
+        </EntityType>
+        <EntityType Name="C_TABLE">
+          <Key>
+            <PropertyRef Name="TAB_ID" />
+          </Key>
+          <Property Name="TAB_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TAB_NUMBER" Type="Int32" Nullable="false" />
+          <Property Name="TAB_SEATING" Type="Int32" Nullable="false" />
+          <Property Name="TAB_REC_ID" Type="Int32" Nullable="false" />
+          <Property Name="TAB_VALID" Type="Boolean" Nullable="false" />
+          <Property Name="TAB_UPDATE_AT" Type="DateTime" Precision="7" />
+          <Property Name="TAB_UPDATE_BY" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="C_RECEPTION" Relationship="Self.FK_TABLE_RECEPTION" FromRole="C_TABLE" ToRole="C_RECEPTION" />
+          <NavigationProperty Name="C_SIT" Relationship="Self.FK_SIT_TAB" FromRole="C_TABLE" ToRole="C_SIT" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Acronym" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Sex" />
+            <PropertyRef Name="BirthDay" />
+            <PropertyRef Name="Job" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="Acronym" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Job" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="Type" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DishType">
+          <Key>
+            <PropertyRef Name="Label" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Label" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DishWish">
+          <Key>
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="Feeling" />
+            <PropertyRef Name="DishType" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="FeelingTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Feeling" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FeelingTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feeling">
+          <Key>
+            <PropertyRef Name="ClientFromFirstName" />
+            <PropertyRef Name="ClientFromLastName" />
+            <PropertyRef Name="Feeling1" />
+            <PropertyRef Name="ClientToFirstName" />
+            <PropertyRef Name="ClientToLastName" />
+            <PropertyRef Name="ClientFromId" />
+            <PropertyRef Name="ClientToId" />
+            <PropertyRef Name="FeelingTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ClientFromFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientFromLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Feeling1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientToFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientToLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientFromId" Type="Int32" Nullable="false" />
+          <Property Name="ClientToId" Type="Int32" Nullable="false" />
+          <Property Name="FeelingTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeelingType">
+          <Key>
+            <PropertyRef Name="Label" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Label" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="DishType" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reception">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="BookingClosingDate" />
+            <PropertyRef Name="Capacity" />
+            <PropertyRef Name="SeatsPerTable" />
+            <PropertyRef Name="IsValid" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="BookingClosingDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="SeatsPerTable" Type="Int32" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="IsValid" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservedDish">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="DishType" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishType" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TablesMap">
+          <Key>
+            <PropertyRef Name="ReceptionName" />
+            <PropertyRef Name="ReceptionDate" />
+            <PropertyRef Name="TableNumber" />
+            <PropertyRef Name="ClientFirstName" />
+            <PropertyRef Name="ClientLastName" />
+            <PropertyRef Name="IsValid" />
+            <PropertyRef Name="ReceptionId" />
+            <PropertyRef Name="TableId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="ReceptionName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReceptionDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="TableNumber" Type="Int32" Nullable="false" />
+          <Property Name="ClientFirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientLastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="ReceptionId" Type="Int32" Nullable="false" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BOOK_CLI">
+          <End Role="C_CLIENT" Type="Self.C_CLIENT" Multiplicity="1" />
+          <End Role="C_BOOK" Type="Self.C_BOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="C_BOOK">
+              <PropertyRef Name="BOO_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOOK_REC">
+          <End Role="C_RECEPTION" Type="Self.C_RECEPTION" Multiplicity="1" />
+          <End Role="C_BOOK" Type="Self.C_BOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="C_BOOK">
+              <PropertyRef Name="BOO_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOOSE_CLI">
+          <End Role="C_CLIENT" Type="Self.C_CLIENT" Multiplicity="1" />
+          <End Role="C_CHOOSE" Type="Self.C_CHOOSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="C_CHOOSE">
+              <PropertyRef Name="CHO_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOOSE_DIS">
+          <End Role="C_DISH" Type="Self.C_DISH" Multiplicity="1" />
+          <End Role="C_CHOOSE" Type="Self.C_CHOOSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_DISH">
+              <PropertyRef Name="DIS_ID" />
+            </Principal>
+            <Dependent Role="C_CHOOSE">
+              <PropertyRef Name="CHO_DIS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOOSE_REC">
+          <End Role="C_RECEPTION" Type="Self.C_RECEPTION" Multiplicity="1" />
+          <End Role="C_CHOOSE" Type="Self.C_CHOOSE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="C_CHOOSE">
+              <PropertyRef Name="CHO_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_CLI_CLI1">
+          <End Role="C_CLIENT" Type="Self.C_CLIENT" Multiplicity="1" />
+          <End Role="C_FEEL_CLI_CLI" Type="Self.C_FEEL_CLI_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="C_FEEL_CLI_CLI">
+              <PropertyRef Name="FCC_CLI_FROM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_CLI_CLI2">
+          <End Role="C_CLIENT" Type="Self.C_CLIENT" Multiplicity="1" />
+          <End Role="C_FEEL_CLI_CLI" Type="Self.C_FEEL_CLI_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="C_FEEL_CLI_CLI">
+              <PropertyRef Name="FCC_CLI_TO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_DIS_CLI">
+          <End Role="C_CLIENT" Type="Self.C_CLIENT" Multiplicity="1" />
+          <End Role="C_FEEL_CLI_DIS" Type="Self.C_FEEL_CLI_DIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="C_FEEL_CLI_DIS">
+              <PropertyRef Name="FCD_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIT_CLI">
+          <End Role="C_CLIENT" Type="Self.C_CLIENT" Multiplicity="1" />
+          <End Role="C_SIT" Type="Self.C_SIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_CLIENT">
+              <PropertyRef Name="CLI_ID" />
+            </Principal>
+            <Dependent Role="C_SIT">
+              <PropertyRef Name="SIT_CLI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISH_TYPE">
+          <End Role="C_DISHTYPE" Type="Self.C_DISHTYPE" Multiplicity="1" />
+          <End Role="C_DISH" Type="Self.C_DISH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_DISHTYPE">
+              <PropertyRef Name="DTY_ID" />
+            </Principal>
+            <Dependent Role="C_DISH">
+              <PropertyRef Name="DIS_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_DIS_DISH">
+          <End Role="C_DISH" Type="Self.C_DISH" Multiplicity="1" />
+          <End Role="C_FEEL_CLI_DIS" Type="Self.C_FEEL_CLI_DIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_DISH">
+              <PropertyRef Name="DIS_ID" />
+            </Principal>
+            <Dependent Role="C_FEEL_CLI_DIS">
+              <PropertyRef Name="FCD_DIS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OFFER_DIS">
+          <End Role="C_DISH" Type="Self.C_DISH" Multiplicity="1" />
+          <End Role="C_OFFER" Type="Self.C_OFFER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_DISH">
+              <PropertyRef Name="DIS_ID" />
+            </Principal>
+            <Dependent Role="C_OFFER">
+              <PropertyRef Name="OFF_DIS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_CLI_FEELINGTYPE">
+          <End Role="C_FEELINGTYPE" Type="Self.C_FEELINGTYPE" Multiplicity="1" />
+          <End Role="C_FEEL_CLI_CLI" Type="Self.C_FEEL_CLI_CLI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_FEELINGTYPE">
+              <PropertyRef Name="FTY_ID" />
+            </Principal>
+            <Dependent Role="C_FEEL_CLI_CLI">
+              <PropertyRef Name="FCC_FTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FEEL_CLI_DIS_FEELINGTYPE">
+          <End Role="C_FEELINGTYPE" Type="Self.C_FEELINGTYPE" Multiplicity="1" />
+          <End Role="C_FEEL_CLI_DIS" Type="Self.C_FEEL_CLI_DIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_FEELINGTYPE">
+              <PropertyRef Name="FTY_ID" />
+            </Principal>
+            <Dependent Role="C_FEEL_CLI_DIS">
+              <PropertyRef Name="FCD_FTY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OFFER_REC">
+          <End Role="C_RECEPTION" Type="Self.C_RECEPTION" Multiplicity="1" />
+          <End Role="C_OFFER" Type="Self.C_OFFER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="C_OFFER">
+              <PropertyRef Name="OFF_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABLE_RECEPTION">
+          <End Role="C_RECEPTION" Type="Self.C_RECEPTION" Multiplicity="1" />
+          <End Role="C_TABLE" Type="Self.C_TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_RECEPTION">
+              <PropertyRef Name="REC_ID" />
+            </Principal>
+            <Dependent Role="C_TABLE">
+              <PropertyRef Name="TAB_REC_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIT_TAB">
+          <End Role="C_TABLE" Type="Self.C_TABLE" Multiplicity="1" />
+          <End Role="C_SIT" Type="Self.C_SIT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_TABLE">
+              <PropertyRef Name="TAB_ID" />
+            </Principal>
+            <Dependent Role="C_SIT">
+              <PropertyRef Name="SIT_TAB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjetWEBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C_BOOK" EntityType="Self.C_BOOK" />
+          <EntitySet Name="C_CHOOSE" EntityType="Self.C_CHOOSE" />
+          <EntitySet Name="C_CLIENT" EntityType="Self.C_CLIENT" />
+          <EntitySet Name="C_DISH" EntityType="Self.C_DISH" />
+          <EntitySet Name="C_DISHTYPE" EntityType="Self.C_DISHTYPE" />
+          <EntitySet Name="C_FEEL_CLI_CLI" EntityType="Self.C_FEEL_CLI_CLI" />
+          <EntitySet Name="C_FEEL_CLI_DIS" EntityType="Self.C_FEEL_CLI_DIS" />
+          <EntitySet Name="C_FEELINGTYPE" EntityType="Self.C_FEELINGTYPE" />
+          <EntitySet Name="C_OFFER" EntityType="Self.C_OFFER" />
+          <EntitySet Name="C_RECEPTION" EntityType="Self.C_RECEPTION" />
+          <EntitySet Name="C_SIT" EntityType="Self.C_SIT" />
+          <EntitySet Name="C_TABLE" EntityType="Self.C_TABLE" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Dish" EntityType="Self.Dish" />
+          <EntitySet Name="DishType" EntityType="Self.DishType" />
+          <EntitySet Name="DishWish" EntityType="Self.DishWish" />
+          <EntitySet Name="Feeling" EntityType="Self.Feeling" />
+          <EntitySet Name="FeelingType" EntityType="Self.FeelingType" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Reception" EntityType="Self.Reception" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" />
+          <EntitySet Name="ReservedDish" EntityType="Self.ReservedDish" />
+          <EntitySet Name="TablesMap" EntityType="Self.TablesMap" />
+          <AssociationSet Name="FK_BOOK_CLI" Association="Self.FK_BOOK_CLI">
+            <End Role="C_CLIENT" EntitySet="C_CLIENT" />
+            <End Role="C_BOOK" EntitySet="C_BOOK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOOK_REC" Association="Self.FK_BOOK_REC">
+            <End Role="C_RECEPTION" EntitySet="C_RECEPTION" />
+            <End Role="C_BOOK" EntitySet="C_BOOK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOOSE_CLI" Association="Self.FK_CHOOSE_CLI">
+            <End Role="C_CLIENT" EntitySet="C_CLIENT" />
+            <End Role="C_CHOOSE" EntitySet="C_CHOOSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOOSE_DIS" Association="Self.FK_CHOOSE_DIS">
+            <End Role="C_DISH" EntitySet="C_DISH" />
+            <End Role="C_CHOOSE" EntitySet="C_CHOOSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOOSE_REC" Association="Self.FK_CHOOSE_REC">
+            <End Role="C_RECEPTION" EntitySet="C_RECEPTION" />
+            <End Role="C_CHOOSE" EntitySet="C_CHOOSE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_CLI_CLI1" Association="Self.FK_FEEL_CLI_CLI_CLI1">
+            <End Role="C_CLIENT" EntitySet="C_CLIENT" />
+            <End Role="C_FEEL_CLI_CLI" EntitySet="C_FEEL_CLI_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_CLI_CLI2" Association="Self.FK_FEEL_CLI_CLI_CLI2">
+            <End Role="C_CLIENT" EntitySet="C_CLIENT" />
+            <End Role="C_FEEL_CLI_CLI" EntitySet="C_FEEL_CLI_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_DIS_CLI" Association="Self.FK_FEEL_CLI_DIS_CLI">
+            <End Role="C_CLIENT" EntitySet="C_CLIENT" />
+            <End Role="C_FEEL_CLI_DIS" EntitySet="C_FEEL_CLI_DIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIT_CLI" Association="Self.FK_SIT_CLI">
+            <End Role="C_CLIENT" EntitySet="C_CLIENT" />
+            <End Role="C_SIT" EntitySet="C_SIT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISH_TYPE" Association="Self.FK_DISH_TYPE">
+            <End Role="C_DISHTYPE" EntitySet="C_DISHTYPE" />
+            <End Role="C_DISH" EntitySet="C_DISH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_DIS_DISH" Association="Self.FK_FEEL_CLI_DIS_DISH">
+            <End Role="C_DISH" EntitySet="C_DISH" />
+            <End Role="C_FEEL_CLI_DIS" EntitySet="C_FEEL_CLI_DIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OFFER_DIS" Association="Self.FK_OFFER_DIS">
+            <End Role="C_DISH" EntitySet="C_DISH" />
+            <End Role="C_OFFER" EntitySet="C_OFFER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_CLI_FEELINGTYPE" Association="Self.FK_FEEL_CLI_CLI_FEELINGTYPE">
+            <End Role="C_FEELINGTYPE" EntitySet="C_FEELINGTYPE" />
+            <End Role="C_FEEL_CLI_CLI" EntitySet="C_FEEL_CLI_CLI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FEEL_CLI_DIS_FEELINGTYPE" Association="Self.FK_FEEL_CLI_DIS_FEELINGTYPE">
+            <End Role="C_FEELINGTYPE" EntitySet="C_FEELINGTYPE" />
+            <End Role="C_FEEL_CLI_DIS" EntitySet="C_FEEL_CLI_DIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OFFER_REC" Association="Self.FK_OFFER_REC">
+            <End Role="C_RECEPTION" EntitySet="C_RECEPTION" />
+            <End Role="C_OFFER" EntitySet="C_OFFER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABLE_RECEPTION" Association="Self.FK_TABLE_RECEPTION">
+            <End Role="C_RECEPTION" EntitySet="C_RECEPTION" />
+            <End Role="C_TABLE" EntitySet="C_TABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIT_TAB" Association="Self.FK_SIT_TAB">
+            <End Role="C_TABLE" EntitySet="C_TABLE" />
+            <End Role="C_SIT" EntitySet="C_SIT" />
+          </AssociationSet>
+          <FunctionImport Name="GetDishToPrepare" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetDishToPrepare_Result)">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFeeling" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetFeeling_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="FtyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMenu" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetMenu_Result)">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="DtyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReservableReception" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetReservableReception_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReservation" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetReservation_Result)">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReservedDish" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetReservedDish_Result)">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetReservedReception" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetReservedReception_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTablesMap" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetTablesMap_Result)">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="TabId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnfeeling" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetUnfeeling_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnreservation" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetUnreservation_Result)">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnreservedReception" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetUnreservedReception_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnwishedDish" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetUnwishedDish_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWishedDish" IsComposable="true" ReturnType="Collection(ProjetWEBModel.GetWishedDish_Result)">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="FtyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteDishWish">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteFeeling">
+            <Parameter Name="CliFromId" Mode="In" Type="Int32" />
+            <Parameter Name="CliToId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMenu">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteReservation">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteReservedDish">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSit">
+            <Parameter Name="TabId" Mode="In" Type="Int32" />
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTable">
+            <Parameter Name="TabId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="NewFeeling">
+            <Parameter Name="CliFromId" Mode="In" Type="Int32" />
+            <Parameter Name="CliToId" Mode="In" Type="Int32" />
+            <Parameter Name="FtyId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewMenu">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewReservation">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewReservedDish">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewSit">
+            <Parameter Name="TabId" Mode="In" Type="Int32" />
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewTable">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="TableNumber" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="TabId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NewWishedDish">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="FtyId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VALIDATE_BOOK">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VALIDATE_RECEPTION">
+            <Parameter Name="RecId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_VALIDATE_TABLE">
+            <Parameter Name="TabId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateFeeling">
+            <Parameter Name="CliFromId" Mode="In" Type="Int32" />
+            <Parameter Name="CliToId" Mode="In" Type="Int32" />
+            <Parameter Name="FtyId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateWishedDish">
+            <Parameter Name="CliId" Mode="In" Type="Int32" />
+            <Parameter Name="DisId" Mode="In" Type="Int32" />
+            <Parameter Name="DtyId" Mode="In" Type="Int32" />
+            <Parameter Name="ModifiedAt" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjetWEBModelStoreContainer" CdmEntityContainer="ProjetWEBEntities">
+          <EntitySetMapping Name="C_BOOK">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_BOOK">
+              <MappingFragment StoreEntitySet="_BOOK">
+                <ScalarProperty Name="BOO_REC_ID" ColumnName="BOO_REC_ID" />
+                <ScalarProperty Name="BOO_CLI_ID" ColumnName="BOO_CLI_ID" />
+                <ScalarProperty Name="BOO_VALID" ColumnName="BOO_VALID" />
+                <ScalarProperty Name="BOO_UPDATE_AT" ColumnName="BOO_UPDATE_AT" />
+                <ScalarProperty Name="BOO_UPDATE_BY" ColumnName="BOO_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_CHOOSE">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_CHOOSE">
+              <MappingFragment StoreEntitySet="_CHOOSE">
+                <ScalarProperty Name="CHO_CLI_ID" ColumnName="CHO_CLI_ID" />
+                <ScalarProperty Name="CHO_DIS_ID" ColumnName="CHO_DIS_ID" />
+                <ScalarProperty Name="CHO_REC_ID" ColumnName="CHO_REC_ID" />
+                <ScalarProperty Name="CHO_UPDATE_AT" ColumnName="CHO_UPDATE_AT" />
+                <ScalarProperty Name="CHO_UPDATE_BY" ColumnName="CHO_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_CLIENT">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_CLIENT">
+              <MappingFragment StoreEntitySet="_CLIENT">
+                <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
+                <ScalarProperty Name="CLI_ACRONYM" ColumnName="CLI_ACRONYM" />
+                <ScalarProperty Name="CLI_PASSWORD" ColumnName="CLI_PASSWORD" />
+                <ScalarProperty Name="CLI_GROUP" ColumnName="CLI_GROUP" />
+                <ScalarProperty Name="CLI_FNAME" ColumnName="CLI_FNAME" />
+                <ScalarProperty Name="CLI_LNAME" ColumnName="CLI_LNAME" />
+                <ScalarProperty Name="CLI_SEX" ColumnName="CLI_SEX" />
+                <ScalarProperty Name="CLI_BDAY" ColumnName="CLI_BDAY" />
+                <ScalarProperty Name="CLI_JOB" ColumnName="CLI_JOB" />
+                <ScalarProperty Name="CLI_UPDATE_AT" ColumnName="CLI_UPDATE_AT" />
+                <ScalarProperty Name="CLI_UPDATE_BY" ColumnName="CLI_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_DISH">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_DISH">
+              <MappingFragment StoreEntitySet="_DISH">
+                <ScalarProperty Name="DIS_ID" ColumnName="DIS_ID" />
+                <ScalarProperty Name="DIS_NAME" ColumnName="DIS_NAME" />
+                <ScalarProperty Name="DIS_TYPE" ColumnName="DIS_TYPE" />
+                <ScalarProperty Name="DIS_UPDATE_AT" ColumnName="DIS_UPDATE_AT" />
+                <ScalarProperty Name="DIS_UPDATE_BY" ColumnName="DIS_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_DISHTYPE">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_DISHTYPE">
+              <MappingFragment StoreEntitySet="_DISHTYPE">
+                <ScalarProperty Name="DTY_ID" ColumnName="DTY_ID" />
+                <ScalarProperty Name="DTY_NAME" ColumnName="DTY_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_FEEL_CLI_CLI">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_FEEL_CLI_CLI">
+              <MappingFragment StoreEntitySet="_FEEL_CLI_CLI">
+                <ScalarProperty Name="FCC_CLI_FROM_ID" ColumnName="FCC_CLI_FROM_ID" />
+                <ScalarProperty Name="FCC_CLI_TO_ID" ColumnName="FCC_CLI_TO_ID" />
+                <ScalarProperty Name="FCC_FTY_ID" ColumnName="FCC_FTY_ID" />
+                <ScalarProperty Name="FCC_UPDATE_AT" ColumnName="FCC_UPDATE_AT" />
+                <ScalarProperty Name="FCC_UPDATE_BY" ColumnName="FCC_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_FEEL_CLI_DIS">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_FEEL_CLI_DIS">
+              <MappingFragment StoreEntitySet="_FEEL_CLI_DIS">
+                <ScalarProperty Name="FCD_CLI_ID" ColumnName="FCD_CLI_ID" />
+                <ScalarProperty Name="FCD_DIS_ID" ColumnName="FCD_DIS_ID" />
+                <ScalarProperty Name="FCD_FTY_ID" ColumnName="FCD_FTY_ID" />
+                <ScalarProperty Name="FCD_UPDATE_AT" ColumnName="FCD_UPDATE_AT" />
+                <ScalarProperty Name="FCD_UPDATE_BY" ColumnName="FCD_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_FEELINGTYPE">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_FEELINGTYPE">
+              <MappingFragment StoreEntitySet="_FEELINGTYPE">
+                <ScalarProperty Name="FTY_ID" ColumnName="FTY_ID" />
+                <ScalarProperty Name="FTY_NAME" ColumnName="FTY_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_OFFER">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_OFFER">
+              <MappingFragment StoreEntitySet="_OFFER">
+                <ScalarProperty Name="OFF_REC_ID" ColumnName="OFF_REC_ID" />
+                <ScalarProperty Name="OFF_DIS_ID" ColumnName="OFF_DIS_ID" />
+                <ScalarProperty Name="OFF_UPDATE_AT" ColumnName="OFF_UPDATE_AT" />
+                <ScalarProperty Name="OFF_UPDATE_BY" ColumnName="OFF_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_RECEPTION">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_RECEPTION">
+              <MappingFragment StoreEntitySet="_RECEPTION">
+                <ScalarProperty Name="REC_ID" ColumnName="REC_ID" />
+                <ScalarProperty Name="REC_NAME" ColumnName="REC_NAME" />
+                <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+                <ScalarProperty Name="REC_DATE_CLOSING_REG" ColumnName="REC_DATE_CLOSING_REG" />
+                <ScalarProperty Name="REC_CAPACITY" ColumnName="REC_CAPACITY" />
+                <ScalarProperty Name="REC_SEAT_TABLE" ColumnName="REC_SEAT_TABLE" />
+                <ScalarProperty Name="REC_VALID" ColumnName="REC_VALID" />
+                <ScalarProperty Name="REC_UPDATE_AT" ColumnName="REC_UPDATE_AT" />
+                <ScalarProperty Name="REC_UPDATE_BY" ColumnName="REC_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_SIT">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_SIT">
+              <MappingFragment StoreEntitySet="_SIT">
+                <ScalarProperty Name="SIT_TAB_ID" ColumnName="SIT_TAB_ID" />
+                <ScalarProperty Name="SIT_CLI_ID" ColumnName="SIT_CLI_ID" />
+                <ScalarProperty Name="SIT_UPDATE_AT" ColumnName="SIT_UPDATE_AT" />
+                <ScalarProperty Name="SIT_UPDATE_BY" ColumnName="SIT_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_TABLE">
+            <EntityTypeMapping TypeName="ProjetWEBModel.C_TABLE">
+              <MappingFragment StoreEntitySet="_TABLE">
+                <ScalarProperty Name="TAB_ID" ColumnName="TAB_ID" />
+                <ScalarProperty Name="TAB_NUMBER" ColumnName="TAB_NUMBER" />
+                <ScalarProperty Name="TAB_SEATING" ColumnName="TAB_SEATING" />
+                <ScalarProperty Name="TAB_REC_ID" ColumnName="TAB_REC_ID" />
+                <ScalarProperty Name="TAB_VALID" ColumnName="TAB_VALID" />
+                <ScalarProperty Name="TAB_UPDATE_AT" ColumnName="TAB_UPDATE_AT" />
+                <ScalarProperty Name="TAB_UPDATE_BY" ColumnName="TAB_UPDATE_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="ProjetWEBModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Acronym" ColumnName="Acronym" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dish">
+            <EntityTypeMapping TypeName="ProjetWEBModel.Dish">
+              <MappingFragment StoreEntitySet="Dish">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DishType">
+            <EntityTypeMapping TypeName="ProjetWEBModel.DishType">
+              <MappingFragment StoreEntitySet="DishType">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DishWish">
+            <EntityTypeMapping TypeName="ProjetWEBModel.DishWish">
+              <MappingFragment StoreEntitySet="DishWish">
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="Feeling" ColumnName="Feeling" />
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="FeelingTypeId" ColumnName="FeelingTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feeling">
+            <EntityTypeMapping TypeName="ProjetWEBModel.Feeling">
+              <MappingFragment StoreEntitySet="Feeling">
+                <ScalarProperty Name="ClientFromFirstName" ColumnName="ClientFromFirstName" />
+                <ScalarProperty Name="ClientFromLastName" ColumnName="ClientFromLastName" />
+                <ScalarProperty Name="Feeling1" ColumnName="Feeling" />
+                <ScalarProperty Name="ClientToFirstName" ColumnName="ClientToFirstName" />
+                <ScalarProperty Name="ClientToLastName" ColumnName="ClientToLastName" />
+                <ScalarProperty Name="ClientFromId" ColumnName="ClientFromId" />
+                <ScalarProperty Name="ClientToId" ColumnName="ClientToId" />
+                <ScalarProperty Name="FeelingTypeId" ColumnName="FeelingTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeelingType">
+            <EntityTypeMapping TypeName="ProjetWEBModel.FeelingType">
+              <MappingFragment StoreEntitySet="FeelingType">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="ProjetWEBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ReceptionName" ColumnName="ReceptionName" />
+                <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reception">
+            <EntityTypeMapping TypeName="ProjetWEBModel.Reception">
+              <MappingFragment StoreEntitySet="Reception">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="BookingClosingDate" ColumnName="BookingClosingDate" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="SeatsPerTable" ColumnName="SeatsPerTable" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="ProjetWEBModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="ReceptionName" ColumnName="ReceptionName" />
+                <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservedDish">
+            <EntityTypeMapping TypeName="ProjetWEBModel.ReservedDish">
+              <MappingFragment StoreEntitySet="ReservedDish">
+                <ScalarProperty Name="ReceptionName" ColumnName="ReceptionName" />
+                <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TablesMap">
+            <EntityTypeMapping TypeName="ProjetWEBModel.TablesMap">
+              <MappingFragment StoreEntitySet="TablesMap">
+                <ScalarProperty Name="ReceptionName" ColumnName="ReceptionName" />
+                <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
+                <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetDishToPrepare" FunctionImportName="GetDishToPrepare">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetDishToPrepare_Result">
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetFeeling" FunctionImportName="GetFeeling">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetFeeling_Result">
+                <ScalarProperty Name="Feeling" ColumnName="Feeling" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="FeelingTypeId" ColumnName="FeelingTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetMenu" FunctionImportName="GetMenu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetMenu_Result">
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetReservableReception" FunctionImportName="GetReservableReception">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetReservableReception_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="BookingClosingDate" ColumnName="BookingClosingDate" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="SeatsPerTable" ColumnName="SeatsPerTable" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetReservation" FunctionImportName="GetReservation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetReservation_Result">
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetReservedDish" FunctionImportName="GetReservedDish">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetReservedDish_Result">
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetReservedReception" FunctionImportName="GetReservedReception">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetReservedReception_Result">
+                <ScalarProperty Name="ReceptionName" ColumnName="ReceptionName" />
+                <ScalarProperty Name="ReceptionDate" ColumnName="ReceptionDate" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetTablesMap" FunctionImportName="GetTablesMap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetTablesMap_Result">
+                <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+                <ScalarProperty Name="ClientFirstName" ColumnName="ClientFirstName" />
+                <ScalarProperty Name="ClientLastName" ColumnName="ClientLastName" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetUnfeeling" FunctionImportName="GetUnfeeling">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetUnfeeling_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetUnreservation" FunctionImportName="GetUnreservation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetUnreservation_Result">
+                <ScalarProperty Name="Acronym" ColumnName="Acronym" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetUnreservedReception" FunctionImportName="GetUnreservedReception">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetUnreservedReception_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="BookingClosingDate" ColumnName="BookingClosingDate" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="SeatsPerTable" ColumnName="SeatsPerTable" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="ReceptionId" ColumnName="ReceptionId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetUnwishedDish" FunctionImportName="GetUnwishedDish">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetUnwishedDish_Result">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="ProjetWEBModel.Store.GetWishedDish" FunctionImportName="GetWishedDish">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProjetWEBModel.GetWishedDish_Result">
+                <ScalarProperty Name="Feeling" ColumnName="Feeling" />
+                <ScalarProperty Name="DishType" ColumnName="DishType" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="FeelingTypeId" ColumnName="FeelingTypeId" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteDishWish" FunctionName="ProjetWEBModel.Store.DeleteDishWish" />
+          <FunctionImportMapping FunctionImportName="DeleteFeeling" FunctionName="ProjetWEBModel.Store.DeleteFeeling" />
+          <FunctionImportMapping FunctionImportName="DeleteMenu" FunctionName="ProjetWEBModel.Store.DeleteMenu" />
+          <FunctionImportMapping FunctionImportName="DeleteReservation" FunctionName="ProjetWEBModel.Store.DeleteReservation" />
+          <FunctionImportMapping FunctionImportName="DeleteReservedDish" FunctionName="ProjetWEBModel.Store.DeleteReservedDish" />
+          <FunctionImportMapping FunctionImportName="DeleteSit" FunctionName="ProjetWEBModel.Store.DeleteSit" />
+          <FunctionImportMapping FunctionImportName="DeleteTable" FunctionName="ProjetWEBModel.Store.DeleteTable" />
+          <FunctionImportMapping FunctionImportName="NewFeeling" FunctionName="ProjetWEBModel.Store.NewFeeling" />
+          <FunctionImportMapping FunctionImportName="NewMenu" FunctionName="ProjetWEBModel.Store.NewMenu" />
+          <FunctionImportMapping FunctionImportName="NewReservation" FunctionName="ProjetWEBModel.Store.NewReservation" />
+          <FunctionImportMapping FunctionImportName="NewReservedDish" FunctionName="ProjetWEBModel.Store.NewReservedDish" />
+          <FunctionImportMapping FunctionImportName="NewSit" FunctionName="ProjetWEBModel.Store.NewSit" />
+          <FunctionImportMapping FunctionImportName="NewTable" FunctionName="ProjetWEBModel.Store.NewTable" />
+          <FunctionImportMapping FunctionImportName="NewWishedDish" FunctionName="ProjetWEBModel.Store.NewWishedDish" />
+          <FunctionImportMapping FunctionImportName="SP_VALIDATE_BOOK" FunctionName="ProjetWEBModel.Store.SP_VALIDATE_BOOK" />
+          <FunctionImportMapping FunctionImportName="SP_VALIDATE_RECEPTION" FunctionName="ProjetWEBModel.Store.SP_VALIDATE_RECEPTION" />
+          <FunctionImportMapping FunctionImportName="SP_VALIDATE_TABLE" FunctionName="ProjetWEBModel.Store.SP_VALIDATE_TABLE" />
+          <FunctionImportMapping FunctionImportName="UpdateFeeling" FunctionName="ProjetWEBModel.Store.UpdateFeeling" />
+          <FunctionImportMapping FunctionImportName="UpdateWishedDish" FunctionName="ProjetWEBModel.Store.UpdateWishedDish" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

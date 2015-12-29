@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f71abb8884f04956a18f35e19a22dd3a" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjetWEBModel.C_BOOK" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_CHOOSE" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_CLIENT" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_DISH" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_DISHTYPE" Width="1.5" PointX="1.5" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_FEEL_CLI_CLI" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_FEEL_CLI_DIS" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_FEELINGTYPE" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_OFFER" Width="1.5" PointX="9" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_RECEPTION" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_SIT" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.C_TABLE" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.Client" Width="1.5" PointX="8.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.Dish" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.DishType" Width="1.5" PointX="8.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.DishWish" Width="1.5" PointX="10.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.Feeling" Width="1.5" PointX="11.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.FeelingType" Width="1.5" PointX="5.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.Menu" Width="1.5" PointX="7.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.Reception" Width="1.5" PointX="11.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.Reservation" Width="1.5" PointX="12.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.ReservedDish" Width="1.5" PointX="9.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetWEBModel.TablesMap" Width="1.5" PointX="11.75" PointY="14" IsExpanded="true" />
+        <AssociationConnector Association="ProjetWEBModel.FK_BOOK_CLI" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_BOOK_REC" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_CHOOSE_CLI" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_CHOOSE_DIS" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_CHOOSE_REC" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_FEEL_CLI_CLI_CLI1" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_FEEL_CLI_CLI_CLI2" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_FEEL_CLI_DIS_CLI" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_SIT_CLI" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_DISH_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_FEEL_CLI_DIS_DISH" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_OFFER_DIS" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_FEEL_CLI_CLI_FEELINGTYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_FEEL_CLI_DIS_FEELINGTYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_OFFER_REC" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_TABLE_RECEPTION" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetWEBModel.FK_SIT_TAB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
