@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CSharp.Reception>
 
 @{
-    ViewBag.Title = "Index";
+  ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -9,49 +9,86 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookingClosingDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsValid)
-        </th>
-        <th></th>
-    </tr>
+<table class="table" id="ReceptionsTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingClosingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsValid)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookingClosingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Capacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsValid)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReceptionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReceptionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReceptionId })
-        </td>
-    </tr>
+        @foreach(var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingClosingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsValid)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReceptionId }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    @Scripts.Render("~/bundles/DataTables")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ReceptionsTable').DataTable({
+                "language": {
+                    "url": '@Url.Content("~/Scripts/DataTables/French.json")'
+                },
+                "columns": [
+                    null,
+                    {
+                        "searchable": false,
+                        "orderable": false
+                    },
+                    {
+                        "searchable": false,
+                        "orderable": false
+                    },
+                    { "searchable": false },
+                    { "searchable": false },
+                    {
+                        "searchable": false,
+                        "orderable": false
+                    }
+                ]
+            });
+        });
+    </script>
 }
 
-</table>
+@section styles{
+    @Styles.Render("~/Content/DataTables/css")
+}
