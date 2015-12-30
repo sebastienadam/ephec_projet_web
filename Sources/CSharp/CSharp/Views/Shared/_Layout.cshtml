@@ -24,8 +24,10 @@
                     @{
                       if(User.Identity.IsAuthenticated) {
                           if(User.IsInRole("Manager")) {
-                        <li>@Html.ActionLink("Manager", "Index", "Home")</li>
-                          } else if(User.IsInRole("Client")) {
+                        <li>@Html.ActionLink("Réceptions", "Index", "Reception")</li>
+                        <li>@Html.ActionLink("Clients", "Index", "Client")</li>
+                        <li>@Html.ActionLink("Plats", "Index", "Dish")</li>
+                          } else {
                         <li>@Html.ActionLink("Client", "Index", "Home")</li>
                           }
                         <li>@Html.ActionLink("Quitter", "Logout", "Home")</li>
