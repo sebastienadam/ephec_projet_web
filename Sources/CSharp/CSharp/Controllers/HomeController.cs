@@ -13,13 +13,14 @@ namespace CSharp.Controllers {
       return View();
     }
 
-    public ActionResult Login() {
+    public ActionResult Login(string returnUrl) {
+      ViewBag.ReturnUrl = returnUrl;
       return View();
     }
 
     [AllowAnonymous]
     [HttpPost]
-    public ActionResult Login(LoginFormModel model, string ReturnUrl) {
+    public ActionResult Login(LoginFormModel model, string returnUrl) {
       C_CLIENT logged;
       if(ModelState.IsValid) {
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {
@@ -34,10 +35,15 @@ namespace CSharp.Controllers {
           var ticket = LoginHelper.CreateAuthenticationTicket(logged.CLI_ACRONYM, logged.CLI_GROUP, false);
           var encrypetedTicket = FormsAuthentication.Encrypt(ticket);
           FormsAuthentication.SetAuthCookie(encrypetedTicket, false);
-          if(String.IsNullOrEmpty(ReturnUrl)) {
+          if(String.IsNullOrEmpty(returnUrl)) {
             return RedirectToAction("Index", "Home");
           } else {
-            return RedirectToRoute(ReturnUrl);
+            returnUrl = Server.UrlDecode(returnUrl);
+            if(Url.IsLocalUrl(returnUrl)) {
+              return Redirect(returnUrl);
+            } else {
+              return RedirectToAction("Index", "Home");
+            }
           }
         } else {
           ModelState.AddModelError("", "Nom d'utilisateur ou mot de passe incorrect");
