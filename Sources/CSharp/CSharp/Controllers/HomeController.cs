@@ -32,6 +32,8 @@ namespace CSharp.Controllers {
         }
         if(logged != null) {
           Session.Clear();
+          Session["FirstName"] = logged.CLI_FNAME;
+          Session["LastName"] = logged.CLI_LNAME;
           var ticket = LoginHelper.CreateAuthenticationTicket(logged.CLI_ACRONYM, logged.CLI_GROUP, false);
           var encrypetedTicket = FormsAuthentication.Encrypt(ticket);
           FormsAuthentication.SetAuthCookie(encrypetedTicket, false);

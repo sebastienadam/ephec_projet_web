@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,23 @@ namespace CSharp {
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
+    }
+    protected void Application_Error(object sender, EventArgs e) {
+      Exception exception = Server.GetLastError();
+      ExceptionUtility.LogException(exception, sender.ToString());
+      Server.ClearError();
+      if(exception.GetType() == typeof(HttpException)) {
+        switch(((HttpException)exception).GetHttpCode()) {
+          case 404:
+            Response.Redirect("~/Error/NotFound", true);
+            break;
+          default:
+            Response.Redirect("~/Error/Index", true);
+            break;
+        }
+      } else {
+        Response.Redirect("~/Error/Index", true);
+      }
     }
 
     protected void Application_AuthenticateRequest() {
