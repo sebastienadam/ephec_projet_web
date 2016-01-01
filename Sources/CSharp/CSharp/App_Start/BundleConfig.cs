@@ -31,10 +31,13 @@ namespace CSharp {
                 "~/Scripts/DataTables/jquery.dataTables.min.js"));
 
       bundles.Add(new StyleBundle("~/Content/JQueryUI/css").Include(
-                "~/Content/themes/base/all.css"));
+                "~/Content/themes/base/all.css",
+                "~/Content/jquery.datetimepicker.css"));
 
       bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                "~/Scripts/jquery-ui-{version}.js"));
+                "~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jquery-ui-datepicker-fr.js",
+                "~/Scripts/jquery.datetimepicker.js"));
     }
   }
 }

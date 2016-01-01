@@ -1,11 +1,8 @@
 ﻿@model CSharp.Models.NewReceptionModel
-
 @{
   ViewBag.Title = "Nouvelle réception";
 }
-
 <h2>@ViewBag.Title</h2>
-
 
 @using(Html.BeginForm()) {
 @Html.AntiForgeryToken()
@@ -20,7 +17,6 @@
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -28,7 +24,6 @@
             @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.BookingClosingDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -36,7 +31,6 @@
             @Html.ValidationMessageFor(model => model.BookingClosingDate, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -44,7 +38,6 @@
             @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.SeatsPerTable, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -52,7 +45,6 @@
             @Html.ValidationMessageFor(model => model.SeatsPerTable, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Créer" class="btn btn-default" />
@@ -60,11 +52,9 @@
     </div>
 </div>
 }
-
 <div>
     @Html.ActionLink("Retour à la liste", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryval")
@@ -73,7 +63,7 @@
             var selectSeatsPerTable = $("#SeatsPerTable");
             var sliderSeatsPerTable = $("<div id='slider'></div>").insertAfter(selectSeatsPerTable).slider({
                 min: 0,
-                max: @ViewBag.SelectListSeatsPerTable.Length - 1,
+                max: @ViewBag.SelectListSeatsPerTable.Length -1,
                 range: "min",
                 value: selectSeatsPerTable[0].selectedIndex,
                 slide: function (event, ui) {
@@ -86,7 +76,7 @@
             var selectCapacity = $("#Capacity");
             var sliderCapacity = $("<div id='slider'></div>").insertAfter(selectCapacity).slider({
                 min: 0,
-                max: @ViewBag.SelectListCapacity.Length - 1,
+                max: @ViewBag.SelectListCapacity.Length -1,
                 range: "min",
                 value: selectCapacity[0].selectedIndex,
                 slide: function (event, ui) {
@@ -96,10 +86,49 @@
             $("#Capacity").change(function () {
                 slider.slider("value", this.selectedIndex);
             });
+            $("#Date").datetimepicker({
+                lang: 'fr',
+                formatDate: 'd/m/Y',
+                format: 'd/m/Y H:i',
+                minDate: 0,
+                step: 30,
+                onClose: function (ct) {
+                    ct.setDate(ct.getDate() - 1);
+                    var DoM = ct.getDate();
+                    var Mon = ct.getMonth() + 1;
+                    var Yea = ct.getFullYear();
+                    var Hou = ct.getHours();
+                    var Min = ct.getMinutes();
+                    if (DoM < 10) {
+                        DoM = '0' + DoM;
+                    }
+                    if (Mon < 10) {
+                        Mon = '0' + Mon;
+                    }
+                    if (Hou < 10) {
+                        Hou = '0' + Hou;
+                    }
+                    if (Min < 10) {
+                        Min = '0' + Min;
+                    }
+                    $("#BookingClosingDate").val(DoM + '/' + Mon + '/' + Yea + ' ' + Hou + ':' + Min)
+                }
+            });
+            $("#BookingClosingDate").datetimepicker({
+                lang: 'fr',
+                formatDate: 'd/m/Y',
+                format: 'd/m/Y H:i',
+                minDate: 0,
+                step: 30/*,
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: $('#Date').val() ? $('#Date').val() : false
+                    });
+                }*/
+            });
         });
     </script>
 }
-
 @section Styles{
     @Styles.Render("~/Content/JQueryUI/css")
 }
