@@ -94,23 +94,11 @@
                 step: 30,
                 onClose: function (ct) {
                     ct.setDate(ct.getDate() - 1);
-                    var DoM = ct.getDate();
-                    var Mon = ct.getMonth() + 1;
+                    var DoM = twoDigit(ct.getDate());
+                    var Mon = twoDigit(ct.getMonth() + 1);
                     var Yea = ct.getFullYear();
-                    var Hou = ct.getHours();
-                    var Min = ct.getMinutes();
-                    if (DoM < 10) {
-                        DoM = '0' + DoM;
-                    }
-                    if (Mon < 10) {
-                        Mon = '0' + Mon;
-                    }
-                    if (Hou < 10) {
-                        Hou = '0' + Hou;
-                    }
-                    if (Min < 10) {
-                        Min = '0' + Min;
-                    }
+                    var Hou = twoDigit(ct.getHours());
+                    var Min = twoDigit(ct.getMinutes());
                     $("#BookingClosingDate").val(DoM + '/' + Mon + '/' + Yea + ' ' + Hou + ':' + Min)
                 }
             });
@@ -127,6 +115,12 @@
                 }*/
             });
         });
+        function twoDigit(num) {
+            if (num < 10) {
+                num = '0' + num;
+            }
+            return num;
+        }
     </script>
 }
 @section Styles{
