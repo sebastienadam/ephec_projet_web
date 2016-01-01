@@ -1,0 +1,105 @@
+﻿@model CSharp.Models.NewReceptionModel
+
+@{
+  ViewBag.Title = "Nouvelle réception";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using(Html.BeginForm()) {
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BookingClosingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BookingClosingDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BookingClosingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Capacity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Capacity, (IEnumerable<SelectListItem>)ViewBag.SelectListCapacity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Capacity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SeatsPerTable, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.SeatsPerTable, (IEnumerable<SelectListItem>)ViewBag.SelectListSeatsPerTable, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SeatsPerTable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Créer" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Retour à la liste", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            var selectSeatsPerTable = $("#SeatsPerTable");
+            var sliderSeatsPerTable = $("<div id='slider'></div>").insertAfter(selectSeatsPerTable).slider({
+                min: 0,
+                max: @ViewBag.SelectListSeatsPerTable.Length - 1,
+                range: "min",
+                value: selectSeatsPerTable[0].selectedIndex,
+                slide: function (event, ui) {
+                    selectSeatsPerTable[0].selectedIndex = ui.value;
+                }
+            });
+            $("#SeatsPerTable").change(function () {
+                SeatsPerTable.slider("value", this.selectedIndex);
+            });
+            var selectCapacity = $("#Capacity");
+            var sliderCapacity = $("<div id='slider'></div>").insertAfter(selectCapacity).slider({
+                min: 0,
+                max: @ViewBag.SelectListCapacity.Length - 1,
+                range: "min",
+                value: selectCapacity[0].selectedIndex,
+                slide: function (event, ui) {
+                    selectCapacity[0].selectedIndex = ui.value;
+                }
+            });
+            $("#Capacity").change(function () {
+                slider.slider("value", this.selectedIndex);
+            });
+        });
+    </script>
+}
+
+@section Styles{
+    @Styles.Render("~/Content/JQueryUI/css")
+}

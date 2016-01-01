@@ -29,6 +29,12 @@ namespace CSharp {
 
       bundles.Add(new ScriptBundle("~/bundles/DataTables").Include(
                 "~/Scripts/DataTables/jquery.dataTables.min.js"));
+
+      bundles.Add(new StyleBundle("~/Content/JQueryUI/css").Include(
+                "~/Content/themes/base/all.css"));
+
+      bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui-{version}.js"));
     }
   }
 }
