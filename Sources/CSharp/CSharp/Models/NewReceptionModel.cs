@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.Attribute;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,11 +11,14 @@ namespace CSharp.Models {
     [Required(AllowEmptyStrings =false,ErrorMessage ="Veuillez donner un nom pour la réception")]
     public string Name { get; set; }
     [Display(Name = "Date - heure")]
+    [DisplayFormat(DataFormatString ="dd/MM/yyyy HH:mm")]
     [Required(ErrorMessage = "Veuillez donner une date pour la réception")]
-    public System.DateTime Date { get; set; }
+    public DateTime Date { get; set; }
     [Display(Name = "Fin des inscriptions")]
+    [DisplayFormat(DataFormatString = "dd/MM/yyyy HH:mm")]
     [Required(ErrorMessage = "Veuillez donner une date de fin des inscription")]
-    public System.DateTime BookingClosingDate { get; set; }
+    [DateTimeLessThanOrEqual("Date")]
+    public DateTime BookingClosingDate { get; set; }
     [Display(Name = "Capacité")]
     [Required(ErrorMessage = "Veuillez donner un nombre maximal de convives")]
     public int Capacity { get; set; }

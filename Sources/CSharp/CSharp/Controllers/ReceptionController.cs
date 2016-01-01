@@ -25,7 +25,12 @@ namespace CSharp.Controllers {
     /*[Authorize(Roles = "Manager")]*/
     [HttpPost]
     public ActionResult Create(NewReceptionModel model) {
-      throw new NotImplementedException();
+      if(ModelState.IsValid) {
+        throw new NotImplementedException();
+      } else {
+        SetViewBagCreate();
+        return View(model);
+      }
     }
 
     private void SetViewBagCreate() {
