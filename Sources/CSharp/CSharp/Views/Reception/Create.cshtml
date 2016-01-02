@@ -51,7 +51,7 @@
             <select class="form-control" id="StartersIdList"></select>
         </div>
         <div class="col-md-2">
-            <button class="form-control btn btn-default" id="StartersIdAdd">Ajouter</button>
+            <button class="form-control btn btn-default adddish" id="StartersIdAdd">Ajouter</button>
         </div>
         <div class="col-md-offset-2 col-md-10" id="StartersIdContainer">
             @Html.ValidationMessageFor(model => model.StartersId, "", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
             <select class="form-control" id="MainCoursesIdList"></select>
         </div>
         <div class="col-md-2">
-            <button class="form-control btn btn-default" id="MainCoursesIdAdd">Ajouter</button>
+            <button class="form-control btn btn-default adddish" id="MainCoursesIdAdd">Ajouter</button>
         </div>
         <div class="col-md-offset-2 col-md-10" id="MainCoursesIdContainer">
             @Html.ValidationMessageFor(model => model.MainCoursesId, "", new { @class = "text-danger" })
@@ -75,7 +75,7 @@
             <select class="form-control" id="DessertsIdList"></select>
         </div>
         <div class="col-md-2">
-            <button class="form-control btn btn-default" id="DessertsIdAdd">Ajouter</button>
+            <button class="form-control btn btn-default adddish" id="DessertsIdAdd">Ajouter</button>
         </div>
         <div class="col-md-offset-2 col-md-10" id="DessertsIdContainer">
             @Html.ValidationMessageFor(model => model.DessertsId, "", new { @class = "text-danger" })
@@ -129,13 +129,15 @@
                 minDate: 0,
                 step: 30,
                 onClose: function (ct) {
-                    ct.setDate(ct.getDate() - 1);
-                    var DoM = twoDigit(ct.getDate());
-                    var Mon = twoDigit(ct.getMonth() + 1);
-                    var Yea = ct.getFullYear();
-                    var Hou = twoDigit(ct.getHours());
-                    var Min = twoDigit(ct.getMinutes());
-                    $("#BookingClosingDate").val(DoM + '/' + Mon + '/' + Yea + ' ' + Hou + ':' + Min)
+                    if ($("#BookingClosingDate").val() === '') {
+                        ct.setDate(ct.getDate() - 1);
+                        var DoM = twoDigit(ct.getDate());
+                        var Mon = twoDigit(ct.getMonth() + 1);
+                        var Yea = ct.getFullYear();
+                        var Hou = twoDigit(ct.getHours());
+                        var Min = twoDigit(ct.getMinutes());
+                        $("#BookingClosingDate").val(DoM + '/' + Mon + '/' + Yea + ' ' + Hou + ':' + Min)
+                    }
                 }
             });
             $("#BookingClosingDate").datetimepicker({
@@ -164,6 +166,21 @@
             $("#DessertsIdAdd").click(function () {
                 selectDish('DessertsIdList', 'DessertsIdContainer', 'DessertsId')
                 return false;
+            });
+            $('#Name').tooltip({
+                content: "Le nom de votre réception doit être unique par date.",
+                items: "input",
+                position: { my: "left bottom-24", at: "left up" }
+            });
+            $('#BookingClosingDate').tooltip({
+                content: "La date de clôture des inscriptions doit être inférieure ou égale à la date de la réception.",
+                items: "input",
+                position: { my: "left bottom-24", at: "left up" }
+            });
+            $('.adddish').tooltip({
+                content: "Cliquez ici pour ajouter le plat sélectionné à la liste.",
+                items: "button",
+                position: { my: "right bottom-24", at: "right up" }
             });
         });
         function selectDish(listId, containerId, inputName) {

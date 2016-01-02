@@ -32,7 +32,8 @@ namespace CSharp {
 
       bundles.Add(new StyleBundle("~/Content/JQueryUI/css").Include(
                 "~/Content/themes/base/all.css",
-                "~/Content/jquery.datetimepicker.css"));
+                "~/Content/jquery.datetimepicker.css",
+                "~/Content/jqueryui.custom.css"));
 
       bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-{version}.js",
