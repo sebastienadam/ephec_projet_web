@@ -531,5 +531,34 @@ namespace CSharp
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateWishedDish", cliIdParameter, disIdParameter, dtyIdParameter, modifiedAtParameter, modifiedByParameter);
         }
+    
+        public virtual int NewReception(string name, Nullable<System.DateTime> date, Nullable<System.DateTime> closingReg, Nullable<int> capacity, Nullable<int> seatsPerTable, string modifiedBy, ObjectParameter recId)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var closingRegParameter = closingReg.HasValue ?
+                new ObjectParameter("ClosingReg", closingReg) :
+                new ObjectParameter("ClosingReg", typeof(System.DateTime));
+    
+            var capacityParameter = capacity.HasValue ?
+                new ObjectParameter("Capacity", capacity) :
+                new ObjectParameter("Capacity", typeof(int));
+    
+            var seatsPerTableParameter = seatsPerTable.HasValue ?
+                new ObjectParameter("SeatsPerTable", seatsPerTable) :
+                new ObjectParameter("SeatsPerTable", typeof(int));
+    
+            var modifiedByParameter = modifiedBy != null ?
+                new ObjectParameter("ModifiedBy", modifiedBy) :
+                new ObjectParameter("ModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewReception", nameParameter, dateParameter, closingRegParameter, capacityParameter, seatsPerTableParameter, modifiedByParameter, recId);
+        }
     }
 }

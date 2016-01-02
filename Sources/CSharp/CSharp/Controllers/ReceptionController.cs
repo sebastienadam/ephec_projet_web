@@ -1,6 +1,7 @@
 ﻿using CSharp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,17 +17,31 @@ namespace CSharp.Controllers {
       return View(model);
     }
 
-    /*[Authorize(Roles = "Manager")]*/
+    [Authorize(Roles = "Manager")]
     public ActionResult Create() {
       SetViewBagCreate();
       return View();
     }
 
-    /*[Authorize(Roles = "Manager")]*/
+    [Authorize(Roles = "Manager")]
     [HttpPost]
     public ActionResult Create(NewReceptionModel model) {
       if(ModelState.IsValid) {
-        throw new NotImplementedException();
+        using(ProjetWEBEntities context = new ProjetWEBEntities()) {
+          var Acronym = Session["Acronym"].ToString();
+          ObjectParameter RecId = new ObjectParameter("RecId", typeof(int));
+          context.NewReception(model.Name, model.Date, model.BookingClosingDate, model.Capacity, model.SeatsPerTable, Acronym, RecId);
+          foreach(int DishId in model.StartersId) {
+            context.NewMenu((int)RecId.Value, DishId, Acronym);
+          }
+          foreach(int DishId in model.MainCoursesId) {
+            context.NewMenu((int)RecId.Value, DishId, Acronym);
+          }
+          foreach(int DishId in model.DessertsId) {
+            context.NewMenu((int)RecId.Value, DishId, Acronym);
+          }
+        }
+        return RedirectToAction("Index", "Reception");
       } else {
         SetViewBagCreate();
         return View(model);

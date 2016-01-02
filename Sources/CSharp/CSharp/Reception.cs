@@ -9,10 +9,10 @@
 
 namespace CSharp
 {
-  using System;
-  using System.Collections.Generic;
-
-  public partial class Reception
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Reception
     {
         public string Name { get; set; }
         public System.DateTime Date { get; set; }

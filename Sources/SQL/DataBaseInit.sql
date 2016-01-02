@@ -1323,6 +1323,28 @@ END
 GO
 -- =============================================================================
 -- Author:      Sébastien Adam
+-- Create date: Jan2016
+-- Description: Creates a reception.
+-- =============================================================================
+CREATE PROCEDURE NewReception
+  @Name varchar(64),
+  @Date datetime2,
+  @ClosingReg datetime2,
+  @Capacity int,
+  @SeatsPerTable int,
+  @ModifiedBy char(8),
+  @RecId int OUTPUT
+AS
+BEGIN
+  SET NOCOUNT ON;
+  IF (@Name IS NOT NULL) AND (@Date IS NOT NULL) AND (@ClosingReg IS NOT NULL) AND (@Capacity IS NOT NULL) AND (@SeatsPerTable IS NOT NULL) AND (@ModifiedBy IS NOT NULL) BEGIN
+    INSERT INTO _RECEPTION (REC_NAME, REC_DATE, REC_DATE_CLOSING_REG, REC_CAPACITY, REC_SEAT_TABLE, REC_UPDATE_BY)
+    VALUES (@Name, @Date, @ClosingReg, @Capacity, @SeatsPerTable, @ModifiedBy);
+    SET @RecId = IDENT_CURRENT('_RECEPTION');
+  END
+END
+GO-- =============================================================================
+-- Author:      Sébastien Adam
 -- Create date: Dec2015
 -- Description: Registers for a reception.
 -- =============================================================================
