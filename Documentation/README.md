@@ -11,3 +11,4 @@ Voici comment s'est déroulée la réalisation de ce projet.
 1. [Utilisation de NuGet](UtilisationNuGet.md)
 1. [Attribut de validation personnalisé](AttributValidationPersonnalise.md)
 1. [Tooltip](Tooltip.md)
+1. [Personnalisation du style](PersonnalisationStyle.md)

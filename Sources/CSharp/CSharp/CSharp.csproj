@@ -275,6 +275,7 @@
     </Compile>
     <Compile Include="Helpers\ExceptionUtility.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\MyHtmlHelper.cs" />
     <Compile Include="Menu.cs">
       <DependentUpon>Reception.tt</DependentUpon>
     </Compile>

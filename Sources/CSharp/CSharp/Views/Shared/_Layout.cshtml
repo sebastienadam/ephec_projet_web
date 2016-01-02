@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using CSharp.Helpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,19 +23,23 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+                    <li class="@Html.PutActiveTabMenu("Home", new string[] { "Index" }, "active")">@Html.ActionLink("Accueil", "Index", "Home")</li>
                     @{
                       if(User.Identity.IsAuthenticated) {
                           if(User.IsInRole("Manager")) {
-                        <li>@Html.ActionLink("Réceptions", "Index", "Reception")</li>
-                        <li>@Html.ActionLink("Clients", "Index", "Client")</li>
-                        <li>@Html.ActionLink("Plats", "Index", "Dish")</li>
-                          } else {
-                        <li>@Html.ActionLink("Client", "Index", "Home")</li>
+                        <li class="dropdown @Html.PutActiveTabMenu("Reception", new string[] { "Index", "Create" }, "active")">
+                            <a href="dropdown-toggle @Url.Action("Index", "Reception")" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Réceptions <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="@Html.PutActiveTabMenu("Reception", new string[] { "Index" }, "active")">@Html.ActionLink("Liste", "Index", "Reception")</li>
+                                <li class="@Html.PutActiveTabMenu("Reception", new string[] { "Create" }, "active")">@Html.ActionLink("Nouvelle", "Create", "Reception")</li>
+                            </ul>
+                        </li>
+                        <li class="@Html.PutActiveTabMenu("Client", new string[] { "Index" }, "active")">@Html.ActionLink("Clients", "Index", "Client")</li>
+                        <li class="@Html.PutActiveTabMenu("Dish", new string[] { "Index" }, "active")">@Html.ActionLink("Plats", "Index", "Dish")</li>
                           }
-                        <li>@Html.ActionLink("Quitter", "Logout", "Home")</li>
+                        <li class="@Html.PutActiveTabMenu("Home", new string[] { "Logout" }, "active")">@Html.ActionLink("Quitter", "Logout", "Home")</li>
                       } else {
-                        <li>@Html.ActionLink("Identification", "Login", "Home")</li>
+                        <li class="@Html.PutActiveTabMenu("Home", new string[] { "Login" }, "active")">@Html.ActionLink("Identification", "Login", "Home")</li>
                       }
                     }
                 </ul>
