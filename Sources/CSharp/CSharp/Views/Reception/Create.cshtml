@@ -143,12 +143,12 @@
                 formatDate: 'd/m/Y',
                 format: 'd/m/Y H:i',
                 minDate: 0,
-                step: 30/*,
+                step: 30,
                 onShow: function (ct) {
                     this.setOptions({
-                        maxDate: $('#Date').val() ? $('#Date').val() : false
+                        maxDate: $('#Date').val() ? $('#Date').val().substring(0,10) : false
                     });
-                }*/
+                }
             });
             populateSelect('Starter', 'StartersIdList');
             populateSelect('MainDish', 'MainCoursesIdList');
