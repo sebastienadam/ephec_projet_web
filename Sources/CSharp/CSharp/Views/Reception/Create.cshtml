@@ -46,6 +46,42 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(model => model.StartersId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            <select class="form-control" id="StartersIdList"></select>
+        </div>
+        <div class="col-md-2">
+            <button class="form-control btn btn-default" id="StartersIdAdd">Ajouter</button>
+        </div>
+        <div class="col-md-offset-2 col-md-10" id="StartersIdContainer">
+            @Html.ValidationMessageFor(model => model.StartersId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MainCoursesId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            <select class="form-control" id="MainCoursesIdList"></select>
+        </div>
+        <div class="col-md-2">
+            <button class="form-control btn btn-default" id="MainCoursesIdAdd">Ajouter</button>
+        </div>
+        <div class="col-md-offset-2 col-md-10" id="MainCoursesIdContainer">
+            @Html.ValidationMessageFor(model => model.MainCoursesId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DessertsId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-8">
+            <select class="form-control" id="DessertsIdList"></select>
+        </div>
+        <div class="col-md-2">
+            <button class="form-control btn btn-default" id="DessertsIdAdd">Ajouter</button>
+        </div>
+        <div class="col-md-offset-2 col-md-10" id="DessertsIdContainer">
+            @Html.ValidationMessageFor(model => model.DessertsId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Créer" class="btn btn-default" />
         </div>
@@ -114,7 +150,42 @@
                     });
                 }*/
             });
+            populateSelect('Starter', 'StartersIdList');
+            populateSelect('MainDish', 'MainCoursesIdList');
+            populateSelect('Dessert', 'DessertsIdList');
+            $("#StartersIdAdd").click(function () {
+                selectDish('StartersIdList', 'StartersIdContainer', 'StartersId')
+                return false;
+            });
+            $("#MainCoursesIdAdd").click(function () {
+                selectDish('MainCoursesIdList', 'MainCoursesIdContainer', 'MainCoursesId')
+                return false;
+            });
+            $("#DessertsIdAdd").click(function () {
+                selectDish('DessertsIdList', 'DessertsIdContainer', 'DessertsId')
+                return false;
+            });
         });
+        function selectDish(listId, containerId, inputName) {
+            var value = $('#' + listId).val();
+            var text = $('#' + listId + ' option:selected').text();
+            if (text !== '') {
+                $('#' + containerId).append('<p class="form-control-static">' + text + '</p>');
+                $('#' + containerId).append('<input type="hidden" value="' + value + '" name="' + inputName + '[]" />');
+                $('#' + listId + ' option:selected').remove();
+            }
+        }
+        function populateSelect(type, id) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Content("~/Api/Dis")?type=' + type,
+                success: function (result) {
+                    $.each(result, function (idx, item) {
+                        $('#' + id).append('<option value="' + item.DishId + '">' + item.Name + '</option>');
+                    })
+                }
+            });
+        }
         function twoDigit(num) {
             if (num < 10) {
                 num = '0' + num;

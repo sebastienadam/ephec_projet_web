@@ -27,12 +27,12 @@ namespace CSharp.Models {
     public int SeatsPerTable { get; set; }
     [Display(Name = "Entrée")]
     [Required(ErrorMessage = "Veuillez donner au moins une entrée")]
-    public IList<int> StartersId { get; set; }
+    public int[] StartersId { get; set; }
     [Display(Name = "Plat principal")]
     [Required(ErrorMessage = "Veuillez donner au moins un plat principal")]
-    public IList<int> MainCoursesId { get; set; }
+    public int[] MainCoursesId { get; set; }
     [Display(Name = "Dessert")]
     [Required(ErrorMessage = "Veuillez donner au moins un dessert")]
-    public IList<int> DessertsId { get; set; }
+    public int[] DessertsId { get; set; }
   }
 }
