@@ -37,6 +37,16 @@
                         <li class="@Html.PutActiveTabMenu("Client", new string[] { "Index" }, "active")">@Html.ActionLink("Clients", "Index", "Client")</li>
                         <li class="@Html.PutActiveTabMenu("Dish", new string[] { "Index" }, "active")">@Html.ActionLink("Plats", "Index", "Dish")</li>
                           }
+                          if(User.IsInRole("Manager") || User.IsInRole("Client")) {
+                        <li class="dropdown @Html.PutActiveTabMenu("MyData", new string[] { "Reservation", "Client", "Dish" }, "active")">
+                            <a href="dropdown-toggle @Url.Action("Index", "MyData")" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mes données <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="@Html.PutActiveTabMenu("MyData", new string[] { "Reservation" }, "active")">@Html.ActionLink("Mes réservations", "Reservation", "MyData")</li>
+                                <li class="@Html.PutActiveTabMenu("MyData", new string[] { "Client" }, "active")">@Html.ActionLink("Relations autres clients", "Client", "MyData")</li>
+                                <li class="@Html.PutActiveTabMenu("MyData", new string[] { "Dish" }, "active")">@Html.ActionLink("Préférences plats", "Dish", "MyData")</li>
+                            </ul>
+                        </li>
+                          }
                         <li class="@Html.PutActiveTabMenu("Home", new string[] { "Logout" }, "active")">@Html.ActionLink("Quitter", "Logout", "Home")</li>
                       } else {
                         <li class="@Html.PutActiveTabMenu("Home", new string[] { "Login" }, "active")">@Html.ActionLink("Identification", "Login", "Home")</li>

@@ -4,14 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CSharp.Controllers
-{
-    public class ClientController : Controller
-    {
-        // GET: Client
-        public ActionResult Index()
-        {
-            return View();
-        }
+namespace CSharp.Controllers {
+  public class ClientController : Controller {
+    // GET: Client
+    public ActionResult Index() {
+      return View();
     }
+  }
 }

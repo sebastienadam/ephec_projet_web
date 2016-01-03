@@ -579,11 +579,11 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Reception\Index.cshtml" />
     <Content Include="Views\Reception\Create.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Dish\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Client\" />
-    <Folder Include="Views\Dish\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
