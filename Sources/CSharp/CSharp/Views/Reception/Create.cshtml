@@ -194,11 +194,12 @@
         }
         function populateSelect(type, id) {
             $.ajax({
+                data: {'target':'Select','type':type},
                 type: "GET",
-                url: '@Url.Content("~/Api/Dis")?type=' + type,
+                url: '@Url.Content("~/Api/Dis")',
                 success: function (result) {
                     $.each(result, function (idx, item) {
-                        $('#' + id).append('<option value="' + item.DishId + '">' + item.Name + '</option>');
+                        $('#' + id).append('<option value="' + item.Value + '">' + item.Text + '</option>');
                     })
                 }
             });

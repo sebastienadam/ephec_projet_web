@@ -280,6 +280,7 @@
     <Compile Include="Menu.cs">
       <DependentUpon>Reception.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DishListItem.cs" />
     <Compile Include="Models\LoginFormModel.cs" />
     <Compile Include="Models\NewReceptionModel.cs" />
     <Compile Include="Models\ReceptionModel.cs" />
