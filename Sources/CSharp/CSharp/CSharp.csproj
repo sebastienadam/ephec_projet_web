@@ -179,6 +179,7 @@
     <Compile Include="Controllers\DishController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MyDataController.cs" />
     <Compile Include="Controllers\ReceptionController.cs" />
     <Compile Include="C_BOOK.cs">
       <DependentUpon>Reception.tt</DependentUpon>
@@ -581,6 +582,9 @@
     <Content Include="Views\Reception\Create.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Dish\Index.cshtml" />
+    <Content Include="Views\MyData\Index.cshtml" />
+    <Content Include="Views\MyData\Reservation.cshtml" />
+    <Content Include="Views\MyData\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
