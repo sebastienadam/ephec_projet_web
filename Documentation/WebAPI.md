@@ -1,0 +1,3 @@
+# Web API
+
+L'API Web a été utilisée pour la gestion des préférences de plat. Il a fallut pas mal chercher car les API fonctinnent sans pouvoir accéder aux paramètres de fonctionnement de l'application (Sessions, ...). Aussi, la gestion des paramètres d'entrée est assez aléatoire. Le "*data binding*" pour le plugin "Datatable" n'a pas pu êter mis en oeuvre. Ainsi, dans ce cas particulier, les données sont fournies par un contrôleur normal, plutôt que par une API Web.

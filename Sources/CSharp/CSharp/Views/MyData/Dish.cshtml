@@ -7,8 +7,57 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Nouvelle préférence", "Create")
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalNewDishWish">
+        Nouvelle préférence
+    </button>
+
 </p>
+
+<div class="modal fade" id="modalNewDishWish" tabindex="-1" role="dialog" aria-labelledby="modalNewDishWish">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nouvelle préférence</h4>
+            </div>
+            <div class="modal-body">
+                <form id="FormNewDishWish">
+                    @Html.Hidden("ClientId", Int32.Parse(Session["ClientId"].ToString()))
+                    @Html.Hidden("ModifiedBy", Session["Acronym"].ToString())
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="DishTypeList" class="col-md-2 control-label">Type</label>
+                            <div class="col-md-10">
+                                <select class="form-control" id="DishTypeList">
+                                    <option value="Starter">Entrée</option>
+                                    <option value="MainDish">Plat principal</option>
+                                    <option value="Dessert">Dessert</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DishList" class="col-md-2 control-label">Plat</label>
+                            <div class="col-md-10">
+                                <select class="form-control" id="DishList" name="DishId"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DishList" class="col-md-2 control-label">Appréciation</label>
+                            <div class="col-md-10">
+                                <input type="checkbox" name="Feeling" value="1" checked data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-on="J'aime" data-off="Je n'aime pas" data-width="100%">
+                                <input type="hidden" name="Feeling" value="2" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="SubmitNewDishWish">Créer</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <table class="table" id="DishWishTable">
     <thead>
@@ -49,7 +98,44 @@
                     { "orderable": false }
                 ]
             });
+            $('#DishTypeList').change(function () {
+                populateDishList();
+            });
+            $('#modalNewDishWish').on('show.bs.modal', function (e) {
+                populateDishList();
+            });
+            $('#FormNewDishWish').submit(function (event) {
+                $.ajax({
+                    data: $('#FormNewDishWish').serialize(),
+                    method: 'POST',
+                    success: function (data) {
+                        if(data.Message === 'OK') {
+                            $('#modalNewDishWish').modal('hide');
+                            $('#DishWishTable').DataTable().draw();
+                        }
+                    },
+                    url: '@Url.Content("~/Api/Diw")'
+                });
+                event.preventDefault();
+            });
+            $('#SubmitNewDishWish').click(function () {
+                $('#FormNewDishWish').submit();
+            });
         });
+        function populateDishList() {
+            var type = $('#DishTypeList option:selected').val();
+            $.ajax({
+                data: { target: 'Select', type: type, unwished: 'Yes', clientid : @Session["ClientId"].ToString() },
+                type: "GET",
+                url: '@Url.Content("~/Api/Diw")',
+                success: function (result) {
+                    $('#DishList').html('');
+                    $.each(result, function (idx, item) {
+                        $('#DishList').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                    })
+                }
+            });
+        }
     </script>
 }
 @section Styles{

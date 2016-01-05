@@ -17,6 +17,7 @@ namespace CSharp.Controllers {
       int ClientId = Int32.Parse(Session["ClientId"].ToString());
       IEnumerable<DishWish> DishWishList = null;
       int recordsTotal;
+      int recordsFiltered;
       using(ProjetWEBEntities contect = new ProjetWEBEntities()) {
         DishWishList = contect.DishWish.Where(dishWish => dishWish.ClientId == ClientId).ToArray();
         recordsTotal = DishWishList.Count();
@@ -24,13 +25,15 @@ namespace CSharp.Controllers {
       if(settings != null) {
         DishWishList = Filter(DishWishList, settings.Search);
         DishWishList = Order(DishWishList, settings.SortColumn, settings.SortOrder);
+        recordsFiltered = DishWishList.Count();
         if(settings.Length > 0) {
           DishWishList = DishWishList.Skip(settings.Start).Take(settings.Length).ToArray();
         }
+      } else {
+        recordsFiltered = DishWishList.Count();
       }
       var data = ConvertDishWishTable(DishWishList);
       var draw = settings.Draw;
-      var recordsFiltered = data.Count();
       return Json(new { data = data, draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsFiltered }, JsonRequestBehavior.AllowGet);
     }
 

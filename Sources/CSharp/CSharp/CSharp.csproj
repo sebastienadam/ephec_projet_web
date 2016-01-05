@@ -279,11 +279,15 @@
     <Compile Include="Helpers\ExceptionUtility.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Helpers\MyHtmlHelper.cs" />
+    <Compile Include="Helpers\MyModelHelper.cs" />
     <Compile Include="Menu.cs">
       <DependentUpon>Reception.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DishListItem.cs" />
+    <Compile Include="Models\DishWishModel.cs" />
     <Compile Include="Models\DishWishListItem.cs" />
+    <Compile Include="Models\NewDishWish.cs" />
+    <Compile Include="Models\SelectOption.cs" />
     <Compile Include="Models\TableSettings.cs" />
     <Compile Include="Models\TableSettingsBinder.cs" />
     <Compile Include="Models\LoginFormModel.cs" />
@@ -491,7 +495,9 @@
     <Content Include="Reception.edmx.diagram">
       <DependentUpon>Reception.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\bootstrap-toggle.js" />
     <Content Include="Scripts\DataTables\French.json" />
+    <Content Include="Content\bootstrap-toggle.less" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -7,16 +7,17 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using CSharp.Helpers;
 
 namespace CSharp.Controllers {
   public class DisController : ApiController {
-    private IList<string> AllowedType = new List<string> { "Starter", "MainDish", "Dessert" };
+    private static IList<string> AllowedType = new List<string> { "Starter", "MainDish", "Dessert" };
     [HttpGet]
     public IEnumerable<object> Get() {
       var DishTypeQuery = HttpContext.Current.Request.QueryString["type"];
       var Target = HttpContext.Current.Request.QueryString["target"];
       IEnumerable<Dish> DishList = null;
-      if(!String.IsNullOrEmpty(DishTypeQuery) && AllowedType.Contains(DishTypeQuery)) {
+      if(!string.IsNullOrEmpty(DishTypeQuery) && AllowedType.Contains(DishTypeQuery)) {
         var DishTypeId = Int32.Parse(ConfigurationManager.AppSettings["DishType" + DishTypeQuery]);
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {
           DishList = context.Dish.Where(dish => dish.DishTypeId == DishTypeId).ToArray();
@@ -29,9 +30,9 @@ namespace CSharp.Controllers {
       switch(Target) {
         case "Select":
           return (from dish in DishList
-                 select new {
-                   Value = dish.DishId,
-                   Text = (String.IsNullOrEmpty(DishTypeQuery) ? String.Format("{0} ({1})", dish.Name, dish.Type) : dish.Name)
+                 select new SelectOption {
+                   Value = dish.DishId.ToString(),
+                   Text = (String.IsNullOrEmpty(DishTypeQuery) ? dish.DisplayName() : dish.Name)
                  }).ToArray();
         //case "Grid":
         //  return (from dish in DishList

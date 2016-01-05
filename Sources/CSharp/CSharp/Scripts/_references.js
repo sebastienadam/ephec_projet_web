@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="ai.0.15.0-build58334.js" />
 /// <reference path="bootstrap.min.js" />
+/// <reference path="bootstrap-toggle.js" />
 /// <reference path="datatables/autofill.bootstrap.min.js" />
 /// <reference path="datatables/autofill.foundation.min.js" />
 /// <reference path="datatables/autofill.jqueryui.min.js" />
