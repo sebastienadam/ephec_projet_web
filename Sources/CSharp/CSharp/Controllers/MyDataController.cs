@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace CSharp.Controllers {
-  /*[Authorize(Roles = "Manager,Client")]*/
+  [Authorize(Roles = "Manager, Client")]
   public class MyDataController : Controller {
     // GET: MyData
     public ActionResult Index() {
@@ -15,6 +15,10 @@ namespace CSharp.Controllers {
       return View();
     }
     public ActionResult Client() {
+      return View();
+    }
+
+    public ActionResult Dish() {
       return View();
     }
   }

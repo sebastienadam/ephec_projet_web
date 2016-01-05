@@ -96,32 +96,17 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(function () {
-            var selectSeatsPerTable = $("#SeatsPerTable");
-            var sliderSeatsPerTable = $("<div id='slider'></div>").insertAfter(selectSeatsPerTable).slider({
-                min: 0,
-                max: @ViewBag.SelectListSeatsPerTable.Length -1,
-                range: "min",
-                value: selectSeatsPerTable[0].selectedIndex,
-                slide: function (event, ui) {
-                    selectSeatsPerTable[0].selectedIndex = ui.value;
-                }
-            });
-            $("#SeatsPerTable").change(function () {
-                SeatsPerTable.slider("value", this.selectedIndex);
-            });
-            var selectCapacity = $("#Capacity");
-            var sliderCapacity = $("<div id='slider'></div>").insertAfter(selectCapacity).slider({
-                min: 0,
-                max: @ViewBag.SelectListCapacity.Length -1,
-                range: "min",
-                value: selectCapacity[0].selectedIndex,
-                slide: function (event, ui) {
-                    selectCapacity[0].selectedIndex = ui.value;
-                }
-            });
-            $("#Capacity").change(function () {
-                slider.slider("value", this.selectedIndex);
-            });
+            setDatetimepicker();
+            setSlider('Capacity', @ViewBag.SelectListCapacity.Length -1);
+            setSlider('SeatsPerTable', @ViewBag.SelectListSeatsPerTable.Length -1);
+            populateSelect('Starter', 'StartersIdList');
+            populateSelect('MainDish', 'MainCoursesIdList');
+            populateSelect('Dessert', 'DessertsIdList');
+            setAddButtonClick();
+            setToolTips();
+        });
+
+        function setDatetimepicker() {
             $("#Date").datetimepicker({
                 lang: 'fr',
                 formatDate: 'd/m/Y',
@@ -148,25 +133,47 @@
                 step: 30,
                 onShow: function (ct) {
                     this.setOptions({
-                        maxDate: $('#Date').val() ? $('#Date').val().substring(0,10) : false
+                        maxDate: $('#Date').val() ? $('#Date').val().substring(0, 10) : false
                     });
                 }
             });
-            populateSelect('Starter', 'StartersIdList');
-            populateSelect('MainDish', 'MainCoursesIdList');
-            populateSelect('Dessert', 'DessertsIdList');
+        }
+
+        function setSlider(selectId, max) {
+            var selectObject = $("#" + selectId);
+            var sliderObject = $("<div id='slider'></div>").insertAfter(selectObject).slider({
+                min: 0,
+                max: max,
+                range: "min",
+                value: selectObject[0].selectedIndex,
+                slide: function (event, ui) {
+                    selectObject[0].selectedIndex = ui.value;
+                }
+            });
+            $("#" + selectId).change(function () {
+                sliderObject.slider("value", this.selectedIndex);
+            });
+        }
+
+        function setAddButtonClick() {
             $("#StartersIdAdd").click(function () {
+                $('#StartersIdContainer span.field-validation-error').text('');
                 selectDish('StartersIdList', 'StartersIdContainer', 'StartersId')
                 return false;
             });
             $("#MainCoursesIdAdd").click(function () {
+                $('#MainCoursesIdContainer span.field-validation-error').text('');
                 selectDish('MainCoursesIdList', 'MainCoursesIdContainer', 'MainCoursesId')
                 return false;
             });
             $("#DessertsIdAdd").click(function () {
+                $('#DessertsIdContainer span.field-validation-error').text('');
                 selectDish('DessertsIdList', 'DessertsIdContainer', 'DessertsId')
                 return false;
             });
+        }
+
+        function setToolTips() {
             $('#Name').tooltip({
                 content: "Le nom de votre réception doit être unique par date.",
                 items: "input",
@@ -182,7 +189,8 @@
                 items: "button",
                 position: { my: "right bottom-24", at: "right up" }
             });
-        });
+        }
+
         function selectDish(listId, containerId, inputName) {
             var value = $('#' + listId).val();
             var text = $('#' + listId + ' option:selected').text();
@@ -192,9 +200,10 @@
                 $('#' + listId + ' option:selected').remove();
             }
         }
+
         function populateSelect(type, id) {
             $.ajax({
-                data: {'target':'Select','type':type},
+                data: { 'target': 'Select', 'type': type },
                 type: "GET",
                 url: '@Url.Content("~/Api/Dis")',
                 success: function (result) {
@@ -204,11 +213,9 @@
                 }
             });
         }
+
         function twoDigit(num) {
-            if (num < 10) {
-                num = '0' + num;
-            }
-            return num;
+            return (num < 10) ? '0' + num : num;
         }
     </script>
 }

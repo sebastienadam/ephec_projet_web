@@ -177,6 +177,8 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\DisController.cs" />
     <Compile Include="Controllers\DishController.cs" />
+    <Compile Include="Controllers\DishWishController.cs" />
+    <Compile Include="Controllers\DiwController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyDataController.cs" />
@@ -281,6 +283,9 @@
       <DependentUpon>Reception.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DishListItem.cs" />
+    <Compile Include="Models\DishWishListItem.cs" />
+    <Compile Include="Models\TableSettings.cs" />
+    <Compile Include="Models\TableSettingsBinder.cs" />
     <Compile Include="Models\LoginFormModel.cs" />
     <Compile Include="Models\NewReceptionModel.cs" />
     <Compile Include="Models\ReceptionModel.cs" />
@@ -586,6 +591,8 @@
     <Content Include="Views\MyData\Index.cshtml" />
     <Content Include="Views\MyData\Reservation.cshtml" />
     <Content Include="Views\MyData\Client.cshtml" />
+    <Content Include="Views\MyData\Dish.cshtml" />
+    <Content Include="Views\DishWish\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

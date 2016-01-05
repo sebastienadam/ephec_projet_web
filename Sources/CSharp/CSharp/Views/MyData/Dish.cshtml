@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CSharp.Models.DishWishListItem>
+
+@{
+  ViewBag.Title = "Préférence de plat";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Nouvelle préférence", "Create")
+</p>
+
+<table class="table" id="DishWishTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Feeling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DishName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DataTables")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DishWishTable').DataTable({
+                language: {
+                    url: '@Url.Content("~/Scripts/DataTables/French.json")'
+                },
+                serverSide: true,
+                ajax: {
+                    url: '@Url.Action("ToGrid","DishWish")',
+                    type: 'POST'
+                },
+                lengthMenu: [[5, 10, 25, -1], ["Un peu", "Beaucoup", "Passionnément", "À la folie"]],
+                columns: [
+                    null,
+                    null,
+                    null,
+                    { "orderable": false }
+                ]
+            });
+        });
+    </script>
+}
+@section Styles{
+    @Styles.Render("~/Content/JQueryUI/css")
+    @Styles.Render("~/Content/DataTables/css")
+}
