@@ -111,7 +111,7 @@
                     success: function (data) {
                         if(data.Message === 'OK') {
                             $('#modalNewDishWish').modal('hide');
-                            $('#DishWishTable').DataTable().draw();
+                            $('#DishWishTable').DataTable().draw(false);
                         }
                     },
                     url: '@Url.Content("~/Api/Diw")'
