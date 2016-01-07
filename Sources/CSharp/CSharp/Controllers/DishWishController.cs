@@ -48,12 +48,12 @@ namespace CSharp.Controllers {
                   dw.DishType,
                   dw.DishName,
                   string.Format("{0} | {1} | {2}",
-                                string.Format("<a class=\"btn btn-default\" href=\"{0}\">Détails</a>",
-                                              Url.Action("Get", "DishWish", new { ClientId = dw.ClientId, DishId = dw.DishId})),
-                                string.Format("<a class=\"btn btn-default\" href=\"{0}\">Modifier</a>",
-                                              Url.Action("Post", "DishWish", new { ClientId = dw.ClientId, DishId = dw.DishId })),
-                                string.Format("<a class=\"btn btn-default\" href=\"{0}\">Supprimer</a>",
-                                              Url.Action("Delete", "DishWish", new { ClientId = dw.ClientId, DishId = dw.DishId })))
+                                string.Format("<button class=\"btn btn-default btn-detail\" id=\"DishWishDetailButton_{0}\">Détails</button>",
+                                              dw.DishId),
+                                string.Format("<button class=\"btn btn-default btn-edit\" id=\"DishWishEditButton_{0}\">Modifier</button>",
+                                              dw.DishId),
+                                string.Format("<button class=\"btn btn-default btn-delete\" id=\"DishWishDeleteButton_{0}\">Supprimer</button>",
+                                              dw.DishId))
                 }).ToArray();
       }
     }

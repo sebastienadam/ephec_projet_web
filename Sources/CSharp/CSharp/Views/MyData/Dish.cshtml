@@ -18,17 +18,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Nouvelle préférence</h4>
+                <h4 class="modal-title" id="myNewModalLabel">Nouvelle préférence</h4>
             </div>
             <div class="modal-body">
                 <form id="FormNewDishWish">
-                    @Html.Hidden("ClientId", Int32.Parse(Session["ClientId"].ToString()))
-                    @Html.Hidden("ModifiedBy", Session["Acronym"].ToString())
+                    @Html.Hidden("ClientId", Session["ClientId"].ToString(), new { id = "NewDishWishClientId" })
+                    @Html.Hidden("ModifiedBy", Session["Acronym"].ToString(), new { id = "NewDishWishModifiedBy" })
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label for="DishTypeList" class="col-md-2 control-label">Type</label>
+                            <label for="NewDishTypeList" class="col-md-2 control-label">Type</label>
                             <div class="col-md-10">
-                                <select class="form-control" id="DishTypeList">
+                                <select class="form-control" id="NewDishTypeList">
                                     <option value="Starter">Entrée</option>
                                     <option value="MainDish">Plat principal</option>
                                     <option value="Dessert">Dessert</option>
@@ -36,15 +36,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="DishList" class="col-md-2 control-label">Plat</label>
+                            <label for="NewDishId" class="col-md-2 control-label">Plat</label>
                             <div class="col-md-10">
-                                <select class="form-control" id="DishList" name="DishId"></select>
+                                <select class="form-control" id="NewDishId" name="DishId"></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="DishList" class="col-md-2 control-label">Appréciation</label>
+                            <label for="NewFeeling" class="col-md-2 control-label">Appréciation</label>
                             <div class="col-md-10">
-                                <input type="checkbox" name="Feeling" value="1" checked data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-on="J'aime" data-off="Je n'aime pas" data-width="100%">
+                                <input type="checkbox" name="Feeling" id="NewFeeling" value="1" checked data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-on="J'aime" data-off="Je n'aime pas" data-width="100%">
                                 <input type="hidden" name="Feeling" value="2" />
                             </div>
                         </div>
@@ -54,6 +54,56 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary" id="SubmitNewDishWish">Créer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDetailDishWish" tabindex="-1" role="dialog" aria-labelledby="modalDetailDishWish">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myDetailModalLabel">Détail d'un préférence</h4>
+            </div>
+            <div class="modal-body">
+                <form id="FormDetailDishWish">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="DetailDishType" class="col-md-4 control-label">Type</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="DetailDishType"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DetailDishName" class="col-md-4 control-label">Plat</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="DetailDishName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DetailFeeling" class="col-md-4 control-label">Appréciation</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="DetailFeeling"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DetailModifiedBy" class="col-md-4 control-label">Modifié par</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="DetailModifiedBy"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DetailModifiedAt" class="col-md-4 control-label">Dernière modification</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="DetailModifiedAt"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
@@ -88,7 +138,7 @@
                 serverSide: true,
                 ajax: {
                     url: '@Url.Action("ToGrid","DishWish")',
-                    type: 'POST'
+                    type: 'POST',
                 },
                 lengthMenu: [[5, 10, 25, -1], ["Un peu", "Beaucoup", "Passionnément", "À la folie"]],
                 columns: [
@@ -96,13 +146,16 @@
                     null,
                     null,
                     { "orderable": false }
-                ]
+                ],
+                fnDrawCallback : function() {
+                    setDetailClick();
+                }
             });
-            $('#DishTypeList').change(function () {
-                populateDishList();
+            $('#NewDishTypeList').change(function () {
+                populateNewDishId();
             });
             $('#modalNewDishWish').on('show.bs.modal', function (e) {
-                populateDishList();
+                populateNewDishId();
             });
             $('#FormNewDishWish').submit(function (event) {
                 $.ajax({
@@ -118,20 +171,53 @@
                 });
                 event.preventDefault();
             });
+            $('#modalDetailDishWish').submit(function (event) {
+                event.preventDefault();
+            });
             $('#SubmitNewDishWish').click(function () {
                 $('#FormNewDishWish').submit();
             });
         });
-        function populateDishList() {
-            var type = $('#DishTypeList option:selected').val();
+        function setDetailClick(){
+            $('button.btn-detail').click(function(){
+                var DishId = $(this).attr('id').replace('DishWishDetailButton_','');
+                $.ajax({
+                    data : {target : 'Single', dishid : DishId, clientid : @Session["ClientId"].ToString() },
+                    type:'GET',
+                    url:'@Url.Content("~/Api/Diw")',
+                    success: function(result) {
+                        if((typeof result.Message) !== 'undefined') {
+                            if(result.Message === 'EMPTY') {
+                                alert("Aucun élément ne correspont à votre sélecion");
+                            } else {
+                                alert("Une erreur est survenue");
+                            }
+                        } else {
+                            $('#DetailDishType').text(result.DishType);
+                            $('#DetailDishName').text(result.DishName);
+                            if(result.DishTypeId === 1) {
+                                $('#DetailFeeling').text("J'aime");
+                            } else{
+                                $('#DetailFeeling').text("Je n'aime pas");
+                            }
+                            $('#DetailModifiedAt').text(result.ModifiedAt);
+                            $('#DetailModifiedBy').text(result.ModifiedBy);
+                            $('#modalDetailDishWish').modal('show');
+                        }
+                    }
+                })
+            });
+        }
+        function populateNewDishId() {
+            var type = $('#NewDishTypeList option:selected').val();
             $.ajax({
                 data: { target: 'Select', type: type, unwished: 'Yes', clientid : @Session["ClientId"].ToString() },
                 type: "GET",
                 url: '@Url.Content("~/Api/Diw")',
                 success: function (result) {
-                    $('#DishList').html('');
+                    $('#NewDishId').html('');
                     $.each(result, function (idx, item) {
-                        $('#DishList').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                        $('#NewDishId').append('<option value="' + item.Value + '">' + item.Text + '</option>');
                     })
                 }
             });
