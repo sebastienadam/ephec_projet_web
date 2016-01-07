@@ -98,6 +98,19 @@ namespace CSharp.Controllers {
       }
     }
 
+    [HttpDelete]
+    public object Delete([FromBody]DishWishModel model) {
+      try {
+        using(ProjetWEBEntities context = new ProjetWEBEntities()) {
+          context.DeleteDishWish(model.ClientId, model.DishId, model.ModifiedAt);
+        }
+        return new { Message = "OK" };
+      } catch(Exception ex) {
+        ExceptionUtility.LogException(ex, HttpContext.Current.Request.RawUrl);
+        return new { Message = "FAIL" };
+      }
+    }
+
     private IEnumerable<DishWishModel> Getwished(int ClientId) {
       try {
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {

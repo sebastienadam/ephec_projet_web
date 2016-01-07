@@ -103,6 +103,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalDeleteDishWish" tabindex="-1" role="dialog" aria-labelledby="modalDeleteDishWish">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myDeleteModalLabel">Suppression d'une préférence</h4>
+            </div>
+            <div class="modal-body">
+                <form id="FormDeleteDishWish">
+                    @Html.Hidden("ClientId", Session["ClientId"].ToString(), new { id = "DeleteClientId" })
+                    @Html.Hidden("DishId", "", new { id = "DeleteDishId" })
+                    @Html.Hidden("ModifiedAt", "", new { id = "DeleteModifiedAt" })
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="DeleteDishType" class="col-md-2 control-label">Type</label>
+                            <div class="col-md-10">
+                                <p class="form-control-static" id="DeleteDishType"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DeleteDishName" class="col-md-2 control-label">Plat</label>
+                            <div class="col-md-10">
+                                <p class="form-control-static" id="DeleteDishName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DeleteFeeling" class="col-md-2 control-label">Appréciation</label>
+                            <div class="col-md-10">
+                                <p class="form-control-static" id="DeleteFeeling"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="bg-danger">
+                    <p><strong>Êtes-vous sûr(e) de vouloir supprimer cette préférence&nbsp;?</strong></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-danger" id="SubmitDeleteDishWish">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="modalDetailDishWish" tabindex="-1" role="dialog" aria-labelledby="modalDetailDishWish">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -195,6 +240,7 @@
                 fnDrawCallback : function() {
                     setDetailClick();
                     setUpdateClick();
+                    setDeleteClick();
                 }
             });
             $('#NewDishTypeList').change(function () {
@@ -247,6 +293,22 @@
                 });
                 event.preventDefault();
             });
+            $('#FormDeleteDishWish').submit(function (event) {
+                $.ajax({
+                    data: $('#FormDeleteDishWish').serialize(),
+                    method: 'DELETE',
+                    success: function (data) {
+                        if(data.Message === 'OK') {
+                            $('#modalDeleteDishWish').modal('hide');
+                            $('#DishWishTable').DataTable().draw(false);
+                        } else {
+                            alert("Une erreur s'est produite!");
+                        }
+                    },
+                    url: '@Url.Content("~/Api/Diw")'
+                });
+                event.preventDefault();
+            });
             $('#FormDetailDishWish').submit(function (event) {
                 event.preventDefault();
             });
@@ -256,7 +318,36 @@
             $('#SubmitUpdateDishWish').click(function () {
                 $('#FormUpdateDishWish').submit();
             });
+            $('#SubmitDeleteDishWish').click(function () {
+                $('#FormDeleteDishWish').submit();
+            });
         });
+        function setDeleteClick() {
+            $('button.btn-delete').click(function(){
+                var DishId = $(this).attr('id').replace('DishWishDeleteButton_','');
+                $.ajax({
+                    data : {target : 'Single', dishid : DishId, clientid : @Session["ClientId"].ToString() },
+                    type:'GET',
+                    url:'@Url.Content("~/Api/Diw")',
+                    success: function(result) {
+                        if((typeof result.Message) !== 'undefined') {
+                            if(result.Message === 'EMPTY') {
+                                alert("Aucun élément ne correspont à votre sélecion");
+                            } else {
+                                alert("Une erreur est survenue");
+                            }
+                        } else {
+                            $('#DeleteDishType').text(result.DishType);
+                            $('#DeleteDishName').text(result.DishName);
+                            (result.FeelingTypeId === 1) ? $('#DeleteFeeling').text("J'aime") : $('#DeleteFeeling').text("Je n'aime pas");
+                            $('#DeleteModifiedAt').val(result.ModifiedAt);
+                            $('#DeleteDishId').val(result.DishId);
+                            $('#modalDeleteDishWish').modal('show');
+                        }
+                    }
+                })
+            });
+        }
         function setDetailClick() {
             $('button.btn-detail').click(function(){
                 var DishId = $(this).attr('id').replace('DishWishDetailButton_','');
