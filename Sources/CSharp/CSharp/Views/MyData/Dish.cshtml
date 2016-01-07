@@ -22,8 +22,8 @@
             </div>
             <div class="modal-body">
                 <form id="FormNewDishWish">
-                    @Html.Hidden("ClientId", Session["ClientId"].ToString(), new { id = "NewDishWishClientId" })
-                    @Html.Hidden("ModifiedBy", Session["Acronym"].ToString(), new { id = "NewDishWishModifiedBy" })
+                    @Html.Hidden("ClientId", Session["ClientId"].ToString(), new { id = "NewClientId" })
+                    @Html.Hidden("ModifiedBy", Session["Acronym"].ToString(), new { id = "NewModifiedBy" })
                     <div class="form-horizontal">
                         <div class="form-group">
                             <label for="NewDishTypeList" class="col-md-2 control-label">Type</label>
@@ -44,8 +44,8 @@
                         <div class="form-group">
                             <label for="NewFeeling" class="col-md-2 control-label">Appréciation</label>
                             <div class="col-md-10">
-                                <input type="checkbox" name="Feeling" id="NewFeeling" value="1" checked data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-on="J'aime" data-off="Je n'aime pas" data-width="100%">
-                                <input type="hidden" name="Feeling" value="2" />
+                                <input type="checkbox" name="FeelingTypeId" id="NewFeeling" value="1" checked data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-on="J'aime" data-off="Je n'aime pas" data-width="100%">
+                                <input type="hidden" name="FeelingTypeId" value="2" />
                             </div>
                         </div>
                     </div>
@@ -54,6 +54,50 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary" id="SubmitNewDishWish">Créer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUpdateDishWish" tabindex="-1" role="dialog" aria-labelledby="modalUpdateDishWish">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myUpdateModalLabel">Nouvelle préférence</h4>
+            </div>
+            <div class="modal-body">
+                <form id="FormUpdateDishWish">
+                    @Html.Hidden("ClientId", Session["ClientId"].ToString(), new { id = "UpdateClientId" })
+                    @Html.Hidden("ModifiedBy", Session["Acronym"].ToString(), new { id = "UpdateModifiedBy" })
+                    @Html.Hidden("ModifiedAt", "", new { id = "UpdateModifiedAt" })
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="UpdateDishType" class="col-md-4 control-label">Type</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="UpdateDishType"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="UpdateDishName" class="col-md-4 control-label">Plat</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static" id="UpdateDishName"></p>
+                                @Html.Hidden("DishId", "", new { id = "UpdateDishId" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="UpdateFeeling" class="col-md-2 control-label">Appréciation</label>
+                            <div class="col-md-10">
+                                <input type="checkbox" name="FeelingTypeId" id="UpdateFeeling" value="1" checked data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-on="J'aime" data-off="Je n'aime pas" data-width="100%">
+                                <input type="hidden" name="FeelingTypeId" value="2" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="SubmitUpdateDishWish">Modifier</button>
             </div>
         </div>
     </div>
@@ -125,6 +169,7 @@
         </tr>
     </thead>
 </table>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryval")
@@ -149,6 +194,7 @@
                 ],
                 fnDrawCallback : function() {
                     setDetailClick();
+                    setUpdateClick();
                 }
             });
             $('#NewDishTypeList').change(function () {
@@ -157,6 +203,18 @@
             $('#modalNewDishWish').on('show.bs.modal', function (e) {
                 populateNewDishId();
             });
+            $('#modalDetailDishWish').on('hidden.bs.modal', function () {
+                $('#modalDetailDishWish form p').each(function(){
+                    $(this).text('');
+                });
+            })
+            $('#modalUpdateDishWish').on('hidden.bs.modal', function () {
+                $('#modalUpdateDishWish form p').each(function(){
+                    $(this).text('');
+                });
+                $('#UpdateModifiedAt').val('');
+                $('#UpdateDishId').val('');
+            })
             $('#FormNewDishWish').submit(function (event) {
                 $.ajax({
                     data: $('#FormNewDishWish').serialize(),
@@ -165,20 +223,41 @@
                         if(data.Message === 'OK') {
                             $('#modalNewDishWish').modal('hide');
                             $('#DishWishTable').DataTable().draw(false);
+                        } else {
+                            alert("Une erreur s'est produite!");
                         }
                     },
                     url: '@Url.Content("~/Api/Diw")'
                 });
                 event.preventDefault();
             });
-            $('#modalDetailDishWish').submit(function (event) {
+            $('#FormUpdateDishWish').submit(function (event) {
+                $.ajax({
+                    data: $('#FormUpdateDishWish').serialize(),
+                    method: 'PUT',
+                    success: function (data) {
+                        if(data.Message === 'OK') {
+                            $('#modalUpdateDishWish').modal('hide');
+                            $('#DishWishTable').DataTable().draw(false);
+                        } else {
+                            alert("Une erreur s'est produite!");
+                        }
+                    },
+                    url: '@Url.Content("~/Api/Diw")'
+                });
+                event.preventDefault();
+            });
+            $('#FormDetailDishWish').submit(function (event) {
                 event.preventDefault();
             });
             $('#SubmitNewDishWish').click(function () {
                 $('#FormNewDishWish').submit();
             });
+            $('#SubmitUpdateDishWish').click(function () {
+                $('#FormUpdateDishWish').submit();
+            });
         });
-        function setDetailClick(){
+        function setDetailClick() {
             $('button.btn-detail').click(function(){
                 var DishId = $(this).attr('id').replace('DishWishDetailButton_','');
                 $.ajax({
@@ -195,14 +274,36 @@
                         } else {
                             $('#DetailDishType').text(result.DishType);
                             $('#DetailDishName').text(result.DishName);
-                            if(result.DishTypeId === 1) {
-                                $('#DetailFeeling').text("J'aime");
-                            } else{
-                                $('#DetailFeeling').text("Je n'aime pas");
-                            }
+                            (result.FeelingTypeId === 1) ? $('#DetailFeeling').text("J'aime") : $('#DetailFeeling').text("Je n'aime pas");
                             $('#DetailModifiedAt').text(result.ModifiedAt);
                             $('#DetailModifiedBy').text(result.ModifiedBy);
                             $('#modalDetailDishWish').modal('show');
+                        }
+                    }
+                })
+            });
+        }
+        function setUpdateClick(){
+            $('button.btn-edit').click(function(){
+                var DishId = $(this).attr('id').replace('DishWishEditButton_','');
+                $.ajax({
+                    data : {target : 'Single', dishid : DishId, clientid : @Session["ClientId"].ToString() },
+                    type:'GET',
+                    url:'@Url.Content("~/Api/Diw")',
+                    success: function(result) {
+                        if((typeof result.Message) !== 'undefined') {
+                            if(result.Message === 'EMPTY') {
+                                alert("Aucun élément ne correspont à votre sélecion");
+                            } else {
+                                alert("Une erreur est survenue");
+                            }
+                        } else {
+                            $('#UpdateModifiedAt').val(result.ModifiedAt);
+                            $('#UpdateDishType').text(result.DishType);
+                            $('#UpdateDishName').text(result.DishName);
+                            $('#UpdateDishId').val(result.DishId);
+                            (result.FeelingTypeId === 1) ? $('#UpdateFeeling').bootstrapToggle('on') : $('#UpdateFeeling').bootstrapToggle('off');
+                            $('#modalUpdateDishWish').modal('show');
                         }
                     }
                 })

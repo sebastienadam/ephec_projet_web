@@ -45,13 +45,15 @@ namespace CSharp.Controllers {
       } else if(Wished) {
         list = Getwished(ClientId);
       } else {
-        // TODO: retourner toutes les préférences de plats
+        list = GetDishWishes();
       }
       if(list != null) {
         if(DishTypeId >= 0 && !Single) {
           list = list.Where(dw => dw.DishTypeId == DishTypeId).ToArray();
         }
-        if(list.Count() > 0) {
+        if(list.Count() == 0) {
+          return new { Message = "EMPTY" };
+        } else {
           switch(Target) {
             case "Select":
               return (from dw in list
@@ -64,8 +66,6 @@ namespace CSharp.Controllers {
             default:
               return list;
           }
-        } else {
-          return new { Message = "EMPTY" };
         }
       } else {
         return new { Message = "FAIL" };
@@ -73,10 +73,23 @@ namespace CSharp.Controllers {
     }
 
     [HttpPost]
-    public object Create([FromBody]NewDishWish data) {
+    public object Create([FromBody]DishWishModel model) {
       try {
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {
-          context.NewWishedDish(data.ClientId, data.DishId, data.Feeling, data.ModifiedBy);
+          context.NewWishedDish(model.ClientId, model.DishId, model.FeelingTypeId, model.ModifiedBy);
+        }
+        return new { Message = "OK" };
+      } catch(Exception ex) {
+        ExceptionUtility.LogException(ex, HttpContext.Current.Request.RawUrl);
+        return new { Message = "FAIL" };
+      }
+    }
+
+    [HttpPut]
+    public object Update([FromBody]DishWishModel model) {
+      try {
+        using(ProjetWEBEntities context = new ProjetWEBEntities()) {
+          context.UpdateWishedDish(model.ClientId, model.DishId, model.FeelingTypeId, model.ModifiedAt, model.ModifiedBy);
         }
         return new { Message = "OK" };
       } catch(Exception ex) {
@@ -130,6 +143,31 @@ namespace CSharp.Controllers {
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {
           var result = from dw in context.DishWish
                        where dw.ClientId == ClientId && dw.DishId == DishId
+                       select new DishWishModel {
+                         ClientFirstName = dw.ClientFirstName,
+                         ClientId = dw.ClientId,
+                         ClientLastName = dw.ClientLastName,
+                         DishId = dw.DishId,
+                         DishName = dw.DishName,
+                         DishType = dw.DishType,
+                         DishTypeId = dw.DishTypeId,
+                         Feeling = dw.Feeling,
+                         FeelingTypeId = dw.FeelingTypeId,
+                         ModifiedAt = dw.ModifiedAt,
+                         ModifiedBy = dw.ModifiedBy
+                       };
+          return (result == null) ? null : result.ToArray();
+        }
+      } catch(Exception ex) {
+        ExceptionUtility.LogException(ex, HttpContext.Current.Request.RawUrl);
+        return null;
+      }
+    }
+
+    private IEnumerable<DishWishModel> GetDishWishes() {
+      try {
+        using(ProjetWEBEntities context = new ProjetWEBEntities()) {
+          var result = from dw in context.DishWish
                        select new DishWishModel {
                          ClientFirstName = dw.ClientFirstName,
                          ClientId = dw.ClientId,
