@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CSharp.Models;
+using CSharp.Helpers;
 
 namespace CSharp.Controllers {
   public class DishWishController : Controller {
@@ -14,27 +15,35 @@ namespace CSharp.Controllers {
 
     [Authorize(Roles = "Manager, Client")]
     public JsonResult ToGrid(TableSettings settings) {
-      int ClientId = Int32.Parse(Session["ClientId"].ToString());
+      int ClientId;
       IEnumerable<DishWish> DishWishList = null;
       int recordsTotal;
       int recordsFiltered;
-      using(ProjetWEBEntities contect = new ProjetWEBEntities()) {
-        DishWishList = contect.DishWish.Where(dishWish => dishWish.ClientId == ClientId).ToArray();
-        recordsTotal = DishWishList.Count();
-      }
-      if(settings != null) {
-        DishWishList = Filter(DishWishList, settings.Search);
-        DishWishList = Order(DishWishList, settings.SortColumn, settings.SortOrder);
-        recordsFiltered = DishWishList.Count();
-        if(settings.Length > 0) {
-          DishWishList = DishWishList.Skip(settings.Start).Take(settings.Length).ToArray();
+      int draw;
+      try {
+        ClientId = Int32.Parse(Session["ClientId"].ToString());
+        using(ProjetWEBEntities contect = new ProjetWEBEntities()) {
+          DishWishList = contect.DishWish.Where(dishWish => dishWish.ClientId == ClientId).ToArray();
+          recordsTotal = DishWishList.Count();
         }
-      } else {
-        recordsFiltered = DishWishList.Count();
+        if(settings != null) {
+          DishWishList = Filter(DishWishList, settings.Search);
+          DishWishList = Order(DishWishList, settings.SortColumn, settings.SortOrder);
+          recordsFiltered = DishWishList.Count();
+          if(settings.Length > 0) {
+            DishWishList = DishWishList.Skip(settings.Start).Take(settings.Length).ToArray();
+          }
+          draw = settings.Draw;
+        } else {
+          recordsFiltered = DishWishList.Count();
+          draw = 1;
+        }
+        var data = ConvertDishWishTable(DishWishList);
+        return Json(new { data = data, draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsFiltered }, JsonRequestBehavior.AllowGet);
+      } catch(Exception ex) {
+        ExceptionUtility.LogException(ex, Request.RawUrl);
+        return Json(new { draw = settings.Draw, error = "Une erreur est survenue lors de la récupération des données" });
       }
-      var data = ConvertDishWishTable(DishWishList);
-      var draw = settings.Draw;
-      return Json(new { data = data, draw = draw, recordsTotal = recordsTotal, recordsFiltered = recordsFiltered }, JsonRequestBehavior.AllowGet);
     }
 
     private string[][] ConvertDishWishTable(IEnumerable<DishWish> DishWishList) {
