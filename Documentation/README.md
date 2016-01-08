@@ -14,3 +14,4 @@ Voici comment s'est déroulée la réalisation de ce projet.
 1. [Personnalisation du style](PersonnalisationStyle.md)
 1. [Web API](WebAPI.md)
 1. [Bouton à bascule](BoutonABascule.md)
+1. [Google Charts](GoogleCharts.md)
