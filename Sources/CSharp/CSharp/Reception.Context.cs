@@ -50,6 +50,7 @@ namespace CSharp
         public virtual DbSet<Reservation> Reservation { get; set; }
         public virtual DbSet<ReservedDish> ReservedDish { get; set; }
         public virtual DbSet<TablesMap> TablesMap { get; set; }
+        public virtual DbSet<DishStatistic> DishStatistic { get; set; }
     
         [DbFunction("ProjetWEBEntities", "GetDishToPrepare")]
         public virtual IQueryable<GetDishToPrepare_Result> GetDishToPrepare(Nullable<int> recId)

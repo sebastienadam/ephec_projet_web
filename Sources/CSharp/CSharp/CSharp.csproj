@@ -222,6 +222,9 @@
     <Compile Include="Dish.cs">
       <DependentUpon>Reception.tt</DependentUpon>
     </Compile>
+    <Compile Include="DishStatistic.cs">
+      <DependentUpon>Reception.tt</DependentUpon>
+    </Compile>
     <Compile Include="DishType.cs">
       <DependentUpon>Reception.tt</DependentUpon>
     </Compile>

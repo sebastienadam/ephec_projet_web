@@ -356,14 +356,10 @@
             $('#FormDetailDishWish').submit(function (event) {
                 event.preventDefault();
             });
-            $('#SubmitNewDishWish').click(function () {
-                $('#FormNewDishWish').submit();
-            });
-            $('#SubmitUpdateDishWish').click(function () {
-                $('#FormUpdateDishWish').submit();
-            });
-            $('#SubmitDeleteDishWish').click(function () {
-                $('#FormDeleteDishWish').submit();
+            $.each(['New','Update','Delete'], function(idx, val){
+                $('#Submit'+val+'DishWish').click(function () {
+                    $('#Form'+val+'DishWish').submit();
+                });
             });
         });
         function setDeleteClick() {

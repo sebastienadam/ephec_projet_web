@@ -177,6 +177,24 @@ warning 6002: The table/view 'ProjetWEB.dbo.Dish' does not have a primary key de
           <Property Name="ModifiedBy" Type="char" MaxLength="8" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjetWEB.dbo.DishStatistic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DishStatistic">
+          <Key>
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+          </Key>
+          <Property Name="Type" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Offered" Type="int" />
+          <Property Name="Chosen" Type="int" />
+          <Property Name="Liked" Type="int" />
+          <Property Name="Disliked" Type="int" />
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ProjetWEB.dbo.DishType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DishType">
           <Key>
@@ -577,6 +595,18 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CountChosenDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CountDislikedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CountLikedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CountOfferedDish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DishId" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeleteDishWish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CliId" Type="int" Mode="In" />
           <Parameter Name="DisId" Type="int" Mode="In" />
@@ -985,6 +1015,18 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
     [Dish].[ModifiedAt] AS [ModifiedAt], 
     [Dish].[ModifiedBy] AS [ModifiedBy]
     FROM [dbo].[Dish] AS [Dish]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DishStatistic" EntityType="Self.DishStatistic" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DishStatistic].[Type] AS [Type], 
+    [DishStatistic].[Name] AS [Name], 
+    [DishStatistic].[Offered] AS [Offered], 
+    [DishStatistic].[Chosen] AS [Chosen], 
+    [DishStatistic].[Liked] AS [Liked], 
+    [DishStatistic].[Disliked] AS [Disliked], 
+    [DishStatistic].[DishId] AS [DishId], 
+    [DishStatistic].[DishTypeId] AS [DishTypeId]
+    FROM [dbo].[DishStatistic] AS [DishStatistic]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="DishType" EntityType="Self.DishType" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2113,7 +2155,24 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="RecId" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="DishStatistic" EntityType="ProjetWEBModel.DishStatistic" />
         </EntityContainer>
+        <EntityType Name="DishStatistic">
+          <Key>
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishTypeId" />
+          </Key>
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Offered" Type="Int32" />
+          <Property Name="Chosen" Type="Int32" />
+          <Property Name="Liked" Type="Int32" />
+          <Property Name="Disliked" Type="Int32" />
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2600,6 +2659,20 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <FunctionImportMapping FunctionImportName="UpdateFeeling" FunctionName="ProjetWEBModel.Store.UpdateFeeling" />
           <FunctionImportMapping FunctionImportName="UpdateWishedDish" FunctionName="ProjetWEBModel.Store.UpdateWishedDish" />
           <FunctionImportMapping FunctionImportName="NewReception" FunctionName="ProjetWEBModel.Store.NewReception" />
+          <EntitySetMapping Name="DishStatistic">
+            <EntityTypeMapping TypeName="ProjetWEBModel.DishStatistic">
+              <MappingFragment StoreEntitySet="DishStatistic">
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="Disliked" ColumnName="Disliked" />
+                <ScalarProperty Name="Liked" ColumnName="Liked" />
+                <ScalarProperty Name="Chosen" ColumnName="Chosen" />
+                <ScalarProperty Name="Offered" ColumnName="Offered" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

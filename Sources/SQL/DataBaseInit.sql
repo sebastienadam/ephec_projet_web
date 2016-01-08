@@ -209,10 +209,17 @@ FROM _DISH, _DISHTYPE
 WHERE DIS_TYPE = DTY_ID;
 GO
 --------------------------------------------------------------------------------
-CREATE VIEW FeelingType AS
-SELECT FTY_NAME AS Label,
-       FTY_ID AS Id
-FROM _FEELINGTYPE;
+CREATE VIEW DishStatistic AS
+SELECT DTY_NAME AS [Type],
+       DIS_NAME AS Name,
+       dbo.CountOfferedDish(DIS_ID) as Offered,
+       dbo.CountChosenDish(DIS_ID) as Chosen,
+       dbo.CountLikedDish(DIS_ID) as Liked,
+       dbo.CountDislikedDish(DIS_ID) as Disliked,
+       DIS_ID AS DishId,
+       DTY_ID DishTypeId
+FROM _DISH, _DISHTYPE
+WHERE DIS_TYPE = DTY_ID;
 GO
 --------------------------------------------------------------------------------
 CREATE VIEW DishType AS
@@ -262,6 +269,12 @@ FROM _FEEL_CLI_CLI,
 WHERE FCC_CLI_FROM_ID = _CLIENT_FROM.CLI_ID
   AND FCC_CLI_TO_ID = _CLIENT_TO.CLI_ID
   AND FCC_FTY_ID = FTY_ID;
+GO
+--------------------------------------------------------------------------------
+CREATE VIEW FeelingType AS
+SELECT FTY_NAME AS Label,
+       FTY_ID AS Id
+FROM _FEELINGTYPE;
 GO
 --------------------------------------------------------------------------------
 CREATE VIEW Menu AS
@@ -363,8 +376,86 @@ GO
 -- ========================================================================== --
 -- =============================================================================
 -- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were chosen.
+-- =============================================================================
+CREATE FUNCTION CountChosenDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _CHOOSE
+  WHERE CHO_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were disliked.
+-- =============================================================================
+CREATE FUNCTION CountDislikedDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _FEEL_CLI_DIS
+  WHERE FCD_FTY_ID = 2
+    AND FCD_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were liked.
+-- =============================================================================
+CREATE FUNCTION CountLikedDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _FEEL_CLI_DIS
+  WHERE FCD_FTY_ID = 1
+    AND FCD_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were offered.
+-- =============================================================================
+CREATE FUNCTION CountOfferedDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _OFFER
+  WHERE OFF_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
 -- Create date: Dec2015
--- Description:	Checks if the username and password match.
+-- Description: Checks if the username and password match.
 -- =============================================================================
 CREATE FUNCTION DoLogin
 (
