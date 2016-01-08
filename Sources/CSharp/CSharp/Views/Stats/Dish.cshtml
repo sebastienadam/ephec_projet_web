@@ -1,0 +1,73 @@
+﻿
+@{
+  ViewBag.Title = "Statistique des plats";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="selectDishType" class="col-md-2 control-label">Type de plat</label>
+        <div class="col-md-10">
+            <select class="form-control" id="selectDishType">
+                <option value="">Tous les plats</option>
+                <option value="Starter">Entrées</option>
+                <option value="MainDish">Plats principaux</option>
+                <option value="Dessert">Desserts</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<div id="barchart_material" style="width:100%;height:1024px"></div>
+
+@section Scripts {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            google.charts.load('current', { 'packages': ['bar'] });
+            $('#selectDishType').change(function () {
+                drawChart();
+            });
+            drawChart();
+        });
+        function drawChart() {
+            var DishType = $('#selectDishType option:selected').val();
+            var DishLabel = $('#selectDishType option:selected').text();
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var jsonData = $.ajax({
+                    url: '@Url.Content("~/Api/Sta")',
+                    method: 'GET',
+                    data: { src: 'Dish', target: 'HeadTab', type: DishType },
+                    dataType: "json",
+                    async: false
+                }).responseJSON;
+                var data = google.visualization.arrayToDataTable(jsonData);
+                var options = {
+                    chart: {
+                        title: 'Statistique des plats',
+                        subtitle: DishLabel,
+                    },
+                    bars: 'horizontal',
+                    series: {
+                        0: { axis: 'upper' },
+                        1: { axis: 'lower' },
+                        2: { axis: 'lower' },
+                        3: { axis: 'lower' }
+                    },
+                    axes: {
+                        x: {
+                            upper: { side: 'top' },
+                            lower: {  }
+                        }
+                    }
+
+                };
+                var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+                chart.draw(data, options);
+            }
+        }
+    </script>
+}

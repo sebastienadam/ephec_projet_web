@@ -36,9 +36,15 @@
                         </li>
                         <li class="@Html.PutActiveTabMenu("Client", new string[] { "Index" }, "active")">@Html.ActionLink("Clients", "Index", "Client")</li>
                         <li class="@Html.PutActiveTabMenu("Dish", new string[] { "Index" }, "active")">@Html.ActionLink("Plats", "Index", "Dish")</li>
+                        <li class="dropdown @Html.PutActiveTabMenu("Stats", new string[] { "Reservation", "Dish" }, "active")">
+                            <a href="dropdown-toggle @Url.Action("Index", "Stats")" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Statistiques <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="@Html.PutActiveTabMenu("Stats", new string[] { "Dish" }, "active")">@Html.ActionLink("Plats", "Dish", "Stats")</li>
+                            </ul>
+                        </li>
                           }
                           if(User.IsInRole("Manager") || User.IsInRole("Client")) {
-                        <li class="dropdown @Html.PutActiveTabMenu("MyData", new string[] { "Reservation", "Client", "Dish" }, "active")">
+                        <li class="dropdown @Html.PutActiveTabMenu("MyData", new string[] { "Index", "Reservation", "Client", "Dish" }, "active")">
                             <a href="dropdown-toggle @Url.Action("Index", "MyData")" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mes données <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="@Html.PutActiveTabMenu("MyData", new string[] { "Reservation" }, "active")">@Html.ActionLink("Mes réservations", "Reservation", "MyData")</li>
@@ -53,6 +59,7 @@
                       }
                     }
                 </ul>
+
             </div>
         </div>
     </div>
