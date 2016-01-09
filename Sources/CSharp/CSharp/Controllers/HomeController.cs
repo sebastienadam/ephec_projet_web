@@ -25,7 +25,7 @@ namespace CSharp.Controllers {
       if(ModelState.IsValid) {
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {
           try {
-            logged = context.C_CLIENT.Where(client => client.CLI_ACRONYM.Equals(model.UserName) && client.CLI_PASSWORD.Equals(model.Password)).First();
+            logged = context.C_CLIENT.Where(client => client.CLI_EMAIL.Equals(model.UserName) && client.CLI_PASSWORD.Equals(model.Password)).First();
           } catch {
             logged = null;
           }

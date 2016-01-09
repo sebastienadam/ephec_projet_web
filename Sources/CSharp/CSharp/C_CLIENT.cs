@@ -36,6 +36,7 @@ namespace CSharp
         public string CLI_JOB { get; set; }
         public Nullable<System.DateTime> CLI_UPDATE_AT { get; set; }
         public string CLI_UPDATE_BY { get; set; }
+        public string CLI_EMAIL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C_BOOK> C_BOOK { get; set; }

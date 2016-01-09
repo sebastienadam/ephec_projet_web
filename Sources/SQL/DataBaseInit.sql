@@ -56,6 +56,7 @@ CREATE TABLE _CHOOSE (
 CREATE TABLE _CLIENT(
   CLI_ID int IDENTITY(1,1) NOT NULL,
   CLI_ACRONYM char(8) NOT NULL,
+  CLI_EMAIL varchar(255) NOT NULL,
   CLI_PASSWORD varchar(64) NOT NULL,
   CLI_GROUP varchar(64) NOT NULL,
   CLI_FNAME varchar(64) NOT NULL,
@@ -180,6 +181,85 @@ INSERT INTO _DISHTYPE (DTY_ID, DTY_NAME)
 VALUES (1, 'entrée'),
        (2, 'plat principal'),
        (3, 'dessert');
+GO
+
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were chosen.
+-- =============================================================================
+CREATE FUNCTION CountChosenDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _CHOOSE
+  WHERE CHO_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were disliked.
+-- =============================================================================
+CREATE FUNCTION CountDislikedDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _FEEL_CLI_DIS
+  WHERE FCD_FTY_ID = 2
+    AND FCD_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were liked.
+-- =============================================================================
+CREATE FUNCTION CountLikedDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _FEEL_CLI_DIS
+  WHERE FCD_FTY_ID = 1
+    AND FCD_DIS_ID = @DishId;
+  RETURN @Result;
+END
+GO
+-- =============================================================================
+-- Author:      Sébastien ADAM
+-- Create date: Jan2016
+-- Description: Count the dishes that were offered.
+-- =============================================================================
+CREATE FUNCTION CountOfferedDish
+(
+  @DishId int
+)
+RETURNS int
+AS
+BEGIN
+  DECLARE @Result int;
+  SELECT @Result = count(*)
+  FROM _OFFER
+  WHERE OFF_DIS_ID = @DishId;
+  RETURN @Result;
+END
 GO
 
 -- ========================================================================== --
@@ -374,84 +454,6 @@ GO
 -- ========================================================================== --
 --   Fonctions                                                                --
 -- ========================================================================== --
--- =============================================================================
--- Author:      Sébastien ADAM
--- Create date: Jan2016
--- Description: Count the dishes that were chosen.
--- =============================================================================
-CREATE FUNCTION CountChosenDish
-(
-  @DishId int
-)
-RETURNS int
-AS
-BEGIN
-  DECLARE @Result int;
-  SELECT @Result = count(*)
-  FROM _CHOOSE
-  WHERE CHO_DIS_ID = @DishId;
-  RETURN @Result;
-END
-GO
--- =============================================================================
--- Author:      Sébastien ADAM
--- Create date: Jan2016
--- Description: Count the dishes that were disliked.
--- =============================================================================
-CREATE FUNCTION CountDislikedDish
-(
-  @DishId int
-)
-RETURNS int
-AS
-BEGIN
-  DECLARE @Result int;
-  SELECT @Result = count(*)
-  FROM _FEEL_CLI_DIS
-  WHERE FCD_FTY_ID = 2
-    AND FCD_DIS_ID = @DishId;
-  RETURN @Result;
-END
-GO
--- =============================================================================
--- Author:      Sébastien ADAM
--- Create date: Jan2016
--- Description: Count the dishes that were liked.
--- =============================================================================
-CREATE FUNCTION CountLikedDish
-(
-  @DishId int
-)
-RETURNS int
-AS
-BEGIN
-  DECLARE @Result int;
-  SELECT @Result = count(*)
-  FROM _FEEL_CLI_DIS
-  WHERE FCD_FTY_ID = 1
-    AND FCD_DIS_ID = @DishId;
-  RETURN @Result;
-END
-GO
--- =============================================================================
--- Author:      Sébastien ADAM
--- Create date: Jan2016
--- Description: Count the dishes that were offered.
--- =============================================================================
-CREATE FUNCTION CountOfferedDish
-(
-  @DishId int
-)
-RETURNS int
-AS
-BEGIN
-  DECLARE @Result int;
-  SELECT @Result = count(*)
-  FROM _OFFER
-  WHERE OFF_DIS_ID = @DishId;
-  RETURN @Result;
-END
-GO
 -- =============================================================================
 -- Author:      Sébastien ADAM
 -- Create date: Dec2015

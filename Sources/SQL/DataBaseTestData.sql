@@ -34,8 +34,9 @@ WHILE @i < 1025 BEGIN
   IF @i = 4 BEGIN
     SET @Group = 'Client'
   END
-  INSERT INTO _CLIENT (CLI_ACRONYM, CLI_PASSWORD, CLI_GROUP, CLI_FNAME, CLI_LNAME, CLI_SEX, CLI_BDAY, CLI_JOB)
+  INSERT INTO _CLIENT (CLI_ACRONYM, CLI_EMAIL, CLI_PASSWORD, CLI_GROUP, CLI_FNAME, CLI_LNAME, CLI_SEX, CLI_BDAY, CLI_JOB)
   VALUES('nopr'+REPLICATE('0',4-LEN(RTRIM(@i))) + RTRIM(@i),
+         'nopr'+REPLICATE('0',4-LEN(RTRIM(@i))) + RTRIM(@i)+'@nowhere.com',
          'password',
          @Group,
          'Prénom '++CONVERT(varchar,@i),

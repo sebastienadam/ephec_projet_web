@@ -34,6 +34,7 @@
           </Key>
           <Property Name="CLI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CLI_ACRONYM" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="CLI_EMAIL" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="CLI_PASSWORD" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CLI_GROUP" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CLI_FNAME" Type="varchar" MaxLength="64" Nullable="false" />
@@ -1377,6 +1378,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <NavigationProperty Name="C_FEEL_CLI_CLI1" Relationship="Self.FK_FEEL_CLI_CLI_CLI2" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_CLI" />
           <NavigationProperty Name="C_FEEL_CLI_DIS" Relationship="Self.FK_FEEL_CLI_DIS_CLI" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_DIS" />
           <NavigationProperty Name="C_SIT" Relationship="Self.FK_SIT_CLI" FromRole="C_CLIENT" ToRole="C_SIT" />
+          <Property Name="CLI_EMAIL" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="C_DISH">
           <Key>
@@ -2204,6 +2206,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <EntitySetMapping Name="C_CLIENT">
             <EntityTypeMapping TypeName="ProjetWEBModel.C_CLIENT">
               <MappingFragment StoreEntitySet="_CLIENT">
+                <ScalarProperty Name="CLI_EMAIL" ColumnName="CLI_EMAIL" />
                 <ScalarProperty Name="CLI_ID" ColumnName="CLI_ID" />
                 <ScalarProperty Name="CLI_ACRONYM" ColumnName="CLI_ACRONYM" />
                 <ScalarProperty Name="CLI_PASSWORD" ColumnName="CLI_PASSWORD" />
