@@ -56,7 +56,7 @@
                         <div class="form-group">
                             <label for="NewDishId" class="col-md-2 control-label">Plat</label>
                             <div class="col-md-10">
-                                <select class="form-control" id="NewDishId" name="DishId"></select>
+                                <select class="form-control" id="NewDishId" name="DishId" data-val="true" data-val-number="Veuillez sélectionner une valeur"></select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -240,10 +240,13 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/DataTables")
     <script type="text/javascript">
+        var errorOccured = '<div class="alert alert-danger alert-dismissible" role="alert" id="NewDishWishAlert">'+
+                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                            'Une erreur est survenue</div>';
+        var emptySelection = '<div class="alert alert-danger alert-dismissible" role="alert" id="NewDishWishAlert">'+
+                             '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                             'Aucun élément ne correspont à votre sélecion</div>';
         $(document).ready(function () {
-            var errorOccured = '<div class="alert alert-danger alert-dismissible" role="alert" id="NewDishWishAlert">'+
-                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-                                'Une errur est survenue</div>';
             $('#DishWishTable').DataTable({
                 language: {
                     url: '@Url.Content("~/Scripts/DataTables/French.json")'
@@ -454,9 +457,20 @@
                 url: '@Url.Content("~/Api/Diw")',
                 success: function (result) {
                     $('#NewDishId').html('');
-                    $.each(result, function (idx, item) {
-                        $('#NewDishId').append('<option value="' + item.Value + '">' + item.Text + '</option>');
-                    })
+                    if((typeof result.Message) !== 'undefined') {
+                        if(result.Message === 'EMPTY') {
+                            $('#NewAlertContainer').html(emptySelection);
+                        } else {
+                            $('#NewAlertContainer').html(errorOccured);
+                        }
+                        $('#SubmitNewDishWish').prop('disabled', true);
+                    } else {
+                        $('#NewAlertContainer').text('');
+                        $('#SubmitNewDishWish').prop('disabled', false);
+                        $.each(result, function (idx, item) {
+                            $('#NewDishId').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                        });
+                    }
                 }
             });
         }
