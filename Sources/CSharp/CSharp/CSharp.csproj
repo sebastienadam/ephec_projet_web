@@ -503,6 +503,8 @@
     <Content Include="Scripts\bootstrap-toggle.js" />
     <Content Include="Scripts\DataTables\French.json" />
     <Content Include="Content\bootstrap-toggle.less" />
+    <None Include="Properties\PublishProfiles\ProjetWeb.pubxml" />
+    <None Include="Properties\PublishProfiles\ProjetWebRelease.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -612,7 +614,9 @@
     <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using CSharp.Models;
+﻿using CSharp.Helpers;
+using CSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -27,39 +28,44 @@ namespace CSharp.Controllers {
     [HttpPost]
     public ActionResult Create(NewReceptionModel model) {
       if(ModelState.IsValid) {
-        using(ProjetWEBEntities context = new ProjetWEBEntities()) {
-          var Acronym = Session["Acronym"].ToString();
-          string imgname = "";
-          string imgdirpath = Server.MapPath("~/Content/images/");
-          ObjectParameter RecId = new ObjectParameter("RecId", typeof(int));
-          if(model.Poster.ContentLength > 0) {
-            imgname = model.Poster.FileName;
-            int i = 1;
-            while(System.IO.File.Exists(imgdirpath+imgname)) {
-              imgname = i.ToString() + '_' + model.Poster.FileName;
-              i++;
+        try {
+          using(ProjetWEBEntities context = new ProjetWEBEntities()) {
+            var Acronym = Session["Acronym"].ToString();
+            string imgname = "";
+            string imgdirpath = Server.MapPath("~/Content/images/");
+            ObjectParameter RecId = new ObjectParameter("RecId", typeof(int));
+            if(model.Poster.ContentLength > 0) {
+              imgname = model.Poster.FileName;
+              int i = 1;
+              while(System.IO.File.Exists(imgdirpath + imgname)) {
+                imgname = i.ToString() + '_' + model.Poster.FileName;
+                i++;
+              }
+              model.Poster.SaveAs(imgdirpath + imgname);
             }
-            model.Poster.SaveAs(imgdirpath + imgname);
+            context.NewReception(model.Name,
+                                 model.Date,
+                                 model.BookingClosingDate,
+                                 model.Capacity,
+                                 model.SeatsPerTable,
+                                 ((model.Poster.ContentLength > 0) ? imgname : null),
+                                 Acronym,
+                                 RecId);
+            foreach(int DishId in model.StartersId) {
+              context.NewMenu((int)RecId.Value, DishId, Acronym);
+            }
+            foreach(int DishId in model.MainCoursesId) {
+              context.NewMenu((int)RecId.Value, DishId, Acronym);
+            }
+            foreach(int DishId in model.DessertsId) {
+              context.NewMenu((int)RecId.Value, DishId, Acronym);
+            }
           }
-          context.NewReception(model.Name,
-                               model.Date,
-                               model.BookingClosingDate,
-                               model.Capacity,
-                               model.SeatsPerTable,
-                               ((model.Poster.ContentLength > 0) ? imgname : null),
-                               Acronym,
-                               RecId);
-          foreach(int DishId in model.StartersId) {
-            context.NewMenu((int)RecId.Value, DishId, Acronym);
-          }
-          foreach(int DishId in model.MainCoursesId) {
-            context.NewMenu((int)RecId.Value, DishId, Acronym);
-          }
-          foreach(int DishId in model.DessertsId) {
-            context.NewMenu((int)RecId.Value, DishId, Acronym);
-          }
+          return RedirectToAction("Index", "Reception");
+        } catch(Exception ex) {
+          ExceptionUtility.LogException(ex, Request.RawUrl);
+          return RedirectToAction("Index", "Error");
         }
-        return RedirectToAction("Index", "Reception");
       } else {
         SetViewBagCreate();
         return View(model);
