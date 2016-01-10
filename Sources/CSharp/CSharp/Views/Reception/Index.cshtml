@@ -33,37 +33,43 @@
     <tbody>
 
         @foreach(var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingClosingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsValid)
-            </td>
-            <td>
-                @Html.ActionLink("Modifier", "Edit", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
-                @Html.ActionLink("Détails", "Details", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
-                @Html.ActionLink("Supprimer", "Delete", new { id = item.ReceptionId }, new { @class = "btn btn-default" })
-            </td>
-        </tr>
+            if(string.IsNullOrEmpty(item.Poster)) {
+                ViewBag.ToolTip = "";
+            } else {
+                ViewBag.ToolTip = "data-poster=\"" + Url.Content("~/Content/images/") + item.Poster + "\"";
+            }
+            <tr @ViewBag.ToolTip>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingClosingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsValid)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
+                    @Html.ActionLink("Détails", "Details", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
+                    @Html.ActionLink("Supprimer", "Delete", new { id = item.ReceptionId }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 
 @section scripts{
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/DataTables")
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#ReceptionsTable').DataTable({
+            var recTable = $('#ReceptionsTable').DataTable({
                 "language": {
                     "url": '@Url.Content("~/Scripts/DataTables/French.json")'
                 },
@@ -83,12 +89,27 @@
                         "searchable": false,
                         "orderable": false
                     }
-                ]
+                ],
+                "fnDrawCallback": function () {
+                    $('tr[data-poster]').tooltip({
+                        items: "tr",
+                        content: function () {
+                            var path = $(this).attr("data-poster");
+                            return '<img src=' + path + ' alt="Affiche de la réception" />';
+                        }
+                    });
+                }
             });
         });
     </script>
 }
 
 @section styles{
+    @Styles.Render("~/Content/JQueryUI/css")
     @Styles.Render("~/Content/DataTables/css")
+    <style>
+        .ui-tooltip {
+            max-width: 100%;
+        }
+    </style>
 }

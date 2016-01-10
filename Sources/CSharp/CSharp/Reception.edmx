@@ -309,6 +309,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.Reception' does not have a primary k
           <Property Name="BookingClosingDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Capacity" Type="int" Nullable="false" />
           <Property Name="SeatsPerTable" Type="int" Nullable="false" />
+          <Property Name="Poster" Type="varchar" MaxLength="256" />
           <Property Name="IsValid" Type="bit" Nullable="false" />
           <Property Name="ReceptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ModifiedAt" Type="datetime2" Precision="7" />
@@ -1092,6 +1093,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
     [Reception].[BookingClosingDate] AS [BookingClosingDate], 
     [Reception].[Capacity] AS [Capacity], 
     [Reception].[SeatsPerTable] AS [SeatsPerTable], 
+    [Reception].[Poster] AS [Poster], 
     [Reception].[IsValid] AS [IsValid], 
     [Reception].[ReceptionId] AS [ReceptionId], 
     [Reception].[ModifiedAt] AS [ModifiedAt], 
@@ -1639,6 +1641,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <Property Name="ReceptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ModifiedAt" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Poster" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -2417,6 +2420,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <EntitySetMapping Name="Reception">
             <EntityTypeMapping TypeName="ProjetWEBModel.Reception">
               <MappingFragment StoreEntitySet="Reception">
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="BookingClosingDate" ColumnName="BookingClosingDate" />

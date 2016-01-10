@@ -23,5 +23,6 @@ namespace CSharp
         public int ReceptionId { get; set; }
         public Nullable<System.DateTime> ModifiedAt { get; set; }
         public string ModifiedBy { get; set; }
+        public string Poster { get; set; }
     }
 }
