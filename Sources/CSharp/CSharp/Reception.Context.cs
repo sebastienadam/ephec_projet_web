@@ -533,7 +533,7 @@ namespace CSharp
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateWishedDish", cliIdParameter, disIdParameter, dtyIdParameter, modifiedAtParameter, modifiedByParameter);
         }
     
-        public virtual int NewReception(string name, Nullable<System.DateTime> date, Nullable<System.DateTime> closingReg, Nullable<int> capacity, Nullable<int> seatsPerTable, string modifiedBy, ObjectParameter recId)
+        public virtual int NewReception(string name, Nullable<System.DateTime> date, Nullable<System.DateTime> closingReg, Nullable<int> capacity, Nullable<int> seatsPerTable, string poster, string modifiedBy, ObjectParameter recId)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("Name", name) :
@@ -555,11 +555,15 @@ namespace CSharp
                 new ObjectParameter("SeatsPerTable", seatsPerTable) :
                 new ObjectParameter("SeatsPerTable", typeof(int));
     
+            var posterParameter = poster != null ?
+                new ObjectParameter("Poster", poster) :
+                new ObjectParameter("Poster", typeof(string));
+    
             var modifiedByParameter = modifiedBy != null ?
                 new ObjectParameter("ModifiedBy", modifiedBy) :
                 new ObjectParameter("ModifiedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewReception", nameParameter, dateParameter, closingRegParameter, capacityParameter, seatsPerTableParameter, modifiedByParameter, recId);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewReception", nameParameter, dateParameter, closingRegParameter, capacityParameter, seatsPerTableParameter, posterParameter, modifiedByParameter, recId);
         }
     }
 }

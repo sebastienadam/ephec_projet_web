@@ -34,7 +34,7 @@
           </Key>
           <Property Name="CLI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CLI_ACRONYM" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="CLI_EMAIL" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CLI_EMAIL" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="CLI_PASSWORD" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CLI_GROUP" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CLI_FNAME" Type="varchar" MaxLength="64" Nullable="false" />
@@ -111,6 +111,7 @@
           <Property Name="REC_DATE_CLOSING_REG" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="REC_CAPACITY" Type="int" Nullable="false" />
           <Property Name="REC_SEAT_TABLE" Type="int" Nullable="false" />
+          <Property Name="REC_IMAGE" Type="varchar" MaxLength="256" />
           <Property Name="REC_VALID" Type="bit" Nullable="false" />
           <Property Name="REC_UPDATE_AT" Type="datetime2" Precision="7" />
           <Property Name="REC_UPDATE_BY" Type="char" MaxLength="8" Nullable="false" />
@@ -889,6 +890,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <Parameter Name="ClosingReg" Type="datetime2" Mode="In" />
           <Parameter Name="Capacity" Type="int" Mode="In" />
           <Parameter Name="SeatsPerTable" Type="int" Mode="In" />
+          <Parameter Name="Poster" Type="varchar" Mode="In" />
           <Parameter Name="ModifiedBy" Type="char" Mode="In" />
           <Parameter Name="RecId" Type="int" Mode="InOut" />
         </Function>
@@ -1378,7 +1380,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <NavigationProperty Name="C_FEEL_CLI_CLI1" Relationship="Self.FK_FEEL_CLI_CLI_CLI2" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_CLI" />
           <NavigationProperty Name="C_FEEL_CLI_DIS" Relationship="Self.FK_FEEL_CLI_DIS_CLI" FromRole="C_CLIENT" ToRole="C_FEEL_CLI_DIS" />
           <NavigationProperty Name="C_SIT" Relationship="Self.FK_SIT_CLI" FromRole="C_CLIENT" ToRole="C_SIT" />
-          <Property Name="CLI_EMAIL" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CLI_EMAIL" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="C_DISH">
           <Key>
@@ -1468,6 +1470,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <NavigationProperty Name="C_CHOOSE" Relationship="Self.FK_CHOOSE_REC" FromRole="C_RECEPTION" ToRole="C_CHOOSE" />
           <NavigationProperty Name="C_OFFER" Relationship="Self.FK_OFFER_REC" FromRole="C_RECEPTION" ToRole="C_OFFER" />
           <NavigationProperty Name="C_TABLE" Relationship="Self.FK_TABLE_RECEPTION" FromRole="C_RECEPTION" ToRole="C_TABLE" />
+          <Property Name="REC_IMAGE" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="C_SIT">
           <Key>
@@ -2154,6 +2157,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
             <Parameter Name="ClosingReg" Mode="In" Type="DateTime" />
             <Parameter Name="Capacity" Mode="In" Type="Int32" />
             <Parameter Name="SeatsPerTable" Mode="In" Type="Int32" />
+            <Parameter Name="Poster" Mode="In" Type="String" />
             <Parameter Name="ModifiedBy" Mode="In" Type="String" />
             <Parameter Name="RecId" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -2283,6 +2287,7 @@ warning 6002: The table/view 'ProjetWEB.dbo.TablesMap' does not have a primary k
           <EntitySetMapping Name="C_RECEPTION">
             <EntityTypeMapping TypeName="ProjetWEBModel.C_RECEPTION">
               <MappingFragment StoreEntitySet="_RECEPTION">
+                <ScalarProperty Name="REC_IMAGE" ColumnName="REC_IMAGE" />
                 <ScalarProperty Name="REC_ID" ColumnName="REC_ID" />
                 <ScalarProperty Name="REC_NAME" ColumnName="REC_NAME" />
                 <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />

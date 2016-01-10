@@ -29,8 +29,26 @@ namespace CSharp.Controllers {
       if(ModelState.IsValid) {
         using(ProjetWEBEntities context = new ProjetWEBEntities()) {
           var Acronym = Session["Acronym"].ToString();
+          string imgname = "";
+          string imgdirpath = Server.MapPath("~/Content/images/");
           ObjectParameter RecId = new ObjectParameter("RecId", typeof(int));
-          context.NewReception(model.Name, model.Date, model.BookingClosingDate, model.Capacity, model.SeatsPerTable, Acronym, RecId);
+          if(model.Poster.ContentLength > 0) {
+            imgname = model.Poster.FileName;
+            int i = 0;
+            while(System.IO.File.Exists(imgdirpath+imgname)) {
+              imgname = i + '_' + model.Poster.FileName;
+              i++;
+            }
+            model.Poster.SaveAs(imgdirpath + imgname);
+          }
+          context.NewReception(model.Name,
+                               model.Date,
+                               model.BookingClosingDate,
+                               model.Capacity,
+                               model.SeatsPerTable,
+                               ((model.Poster.ContentLength > 0) ? imgname : null),
+                               Acronym,
+                               RecId);
           foreach(int DishId in model.StartersId) {
             context.NewMenu((int)RecId.Value, DishId, Acronym);
           }

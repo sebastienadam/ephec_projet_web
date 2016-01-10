@@ -4,7 +4,7 @@
 }
 <h2>@ViewBag.Title</h2>
 
-@using(Html.BeginForm()) {
+@using(Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" })) {
 @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
@@ -79,6 +79,13 @@
         </div>
         <div class="col-md-offset-2 col-md-10" id="DessertsIdContainer">
             @Html.ValidationMessageFor(model => model.DessertsId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Poster">Affiche</label>
+        <div class="col-md-10">
+            <input type="file" value="" name="Poster" id="Poster" class="text-box single-line">
+            @Html.ValidationMessageFor(model => model.Poster, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">

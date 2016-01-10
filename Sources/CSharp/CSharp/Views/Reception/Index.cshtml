@@ -50,9 +50,9 @@
                 @Html.DisplayFor(modelItem => item.IsValid)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ReceptionId }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Modifier", "Edit", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.ReceptionId }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.ReceptionId }, new { @class = "btn btn-default" })
             </td>
         </tr>
         }
