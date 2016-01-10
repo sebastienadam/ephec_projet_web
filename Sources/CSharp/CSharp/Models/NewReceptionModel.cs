@@ -34,5 +34,7 @@ namespace CSharp.Models {
     [Display(Name = "Dessert")]
     [Required(ErrorMessage = "Veuillez donner au moins un dessert")]
     public int[] DessertsId { get; set; }
+    [Display(Name = "Affiche")]
+    public HttpPostedFileBase Poster { get; set; }
   }
 }

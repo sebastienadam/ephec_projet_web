@@ -56,7 +56,7 @@ CREATE TABLE _CHOOSE (
 CREATE TABLE _CLIENT(
   CLI_ID int IDENTITY(1,1) NOT NULL,
   CLI_ACRONYM char(8) NOT NULL,
-  CLI_EMAIL varchar(255) NOT NULL,
+  CLI_EMAIL varchar(256) NOT NULL,
   CLI_PASSWORD varchar(64) NOT NULL,
   CLI_GROUP varchar(64) NOT NULL,
   CLI_FNAME varchar(64) NOT NULL,
@@ -126,6 +126,7 @@ CREATE TABLE _RECEPTION (
   REC_DATE_CLOSING_REG datetime2 NOT NULL,
   REC_CAPACITY int NOT NULL,
   REC_SEAT_TABLE int NOT NULL,
+  REC_IMAGE varchar(256),
   REC_VALID bit NOT NULL DEFAULT(0), -- BR004 (partial)
   REC_UPDATE_AT datetime2,
   REC_UPDATE_BY char(8) NOT NULL DEFAULT(CURRENT_USER),
@@ -382,6 +383,7 @@ SELECT REC_NAME AS Name,
        REC_DATE_CLOSING_REG AS BookingClosingDate,
        REC_CAPACITY AS Capacity,
        REC_SEAT_TABLE AS SeatsPerTable,
+       REC_IMAGE AS Poster,
        REC_VALID AS IsValid,
        REC_ID AS ReceptionId,
        REC_UPDATE_AT AS ModifiedAt,
@@ -1425,14 +1427,15 @@ CREATE PROCEDURE NewReception
   @ClosingReg datetime2,
   @Capacity int,
   @SeatsPerTable int,
+  @Poster varchar(256),
   @ModifiedBy char(8),
   @RecId int OUTPUT
 AS
 BEGIN
   SET NOCOUNT ON;
   IF (@Name IS NOT NULL) AND (@Date IS NOT NULL) AND (@ClosingReg IS NOT NULL) AND (@Capacity IS NOT NULL) AND (@SeatsPerTable IS NOT NULL) AND (@ModifiedBy IS NOT NULL) BEGIN
-    INSERT INTO _RECEPTION (REC_NAME, REC_DATE, REC_DATE_CLOSING_REG, REC_CAPACITY, REC_SEAT_TABLE, REC_UPDATE_BY)
-    VALUES (@Name, @Date, @ClosingReg, @Capacity, @SeatsPerTable, @ModifiedBy);
+    INSERT INTO _RECEPTION (REC_NAME, REC_DATE, REC_DATE_CLOSING_REG, REC_CAPACITY, REC_SEAT_TABLE, REC_IMAGE, REC_UPDATE_BY)
+    VALUES (@Name, @Date, @ClosingReg, @Capacity, @SeatsPerTable, @Poster, @ModifiedBy);
     SET @RecId = IDENT_CURRENT('_RECEPTION');
   END
 END
