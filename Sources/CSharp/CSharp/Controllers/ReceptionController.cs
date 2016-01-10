@@ -34,9 +34,9 @@ namespace CSharp.Controllers {
           ObjectParameter RecId = new ObjectParameter("RecId", typeof(int));
           if(model.Poster.ContentLength > 0) {
             imgname = model.Poster.FileName;
-            int i = 0;
+            int i = 1;
             while(System.IO.File.Exists(imgdirpath+imgname)) {
-              imgname = i + '_' + model.Poster.FileName;
+              imgname = i.ToString() + '_' + model.Poster.FileName;
               i++;
             }
             model.Poster.SaveAs(imgdirpath + imgname);

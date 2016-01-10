@@ -13,3 +13,15 @@ $('.adddish').tooltip({
     position: { my: "right bottom-24", at: "right up" }
 });
 ````
+
+Les *tooltips* ont également été utilisés pour montrer l'affiche des réceptions dans la liste des réceptions. Un attribut `data-poster` est ajouté à chaque ligne correspondant à une réception pour laquelle une image a été chargée. Ensuite, le code suivant a été utilisé pour générer le *tooltip*.
+
+````
+$('tr[data-poster]').tooltip({
+    items: "tr",
+    content: function () {
+        var path = $(this).attr("data-poster");
+        return '<img src=' + path + ' alt="Affiche de la réception" />';
+    }
+});
+````

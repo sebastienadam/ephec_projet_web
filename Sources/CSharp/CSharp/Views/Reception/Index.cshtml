@@ -89,15 +89,13 @@
                         "searchable": false,
                         "orderable": false
                     }
-                ],
-                "fnDrawCallback": function () {
-                    $('tr[data-poster]').tooltip({
-                        items: "tr",
-                        content: function () {
-                            var path = $(this).attr("data-poster");
-                            return '<img src=' + path + ' alt="Affiche de la réception" />';
-                        }
-                    });
+                ]
+            });
+            $('tr[data-poster]').tooltip({
+                items: "tr",
+                content: function () {
+                    var path = $(this).attr("data-poster");
+                    return '<img src=' + path + ' alt="Affiche de la réception" />';
                 }
             });
         });
